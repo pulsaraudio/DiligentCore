@@ -1,24 +1,32 @@
+# Diligent Graphics sub-modules shared with MoltenVK
+# They are forked to our repository from the original KhronosGroup repo
+# instead of DiligentGraphics's own forks because MoltenVK may use more recent
+# revisions.
 [submodule "ThirdParty/glslang"]
 	path = ThirdParty/glslang
-	url = https://github.com/DiligentGraphics/glslang
+	url = https://github.com/pulsaraudio/glslang
 [submodule "ThirdParty/SPIRV-Cross"]
 	path = ThirdParty/SPIRV-Cross
-	url = https://github.com/DiligentGraphics/SPIRV-Cross
+	url = https://github.com/pulsaraudio/SPIRV-Cross
+[submodule "ThirdParty/Vulkan-Headers"]
+		path = ThirdParty/Vulkan-Headers
+		url = https://github.com/pulsaraudio/Vulkan-Headers
+
+# Diligent Graphics sub-modules potentially modified by us
+[submodule "ThirdParty/volk"]
+			path = ThirdParty/volk
+			url = https://github.com/pulsaraudio/volk
 [submodule "ThirdParty/SPIRV-Tools"]
 	path = ThirdParty/SPIRV-Tools
-	url = https://github.com/DiligentGraphics/SPIRV-Tools
+	url = https://github.com/pulsaraudio/SPIRV-Tools
 [submodule "ThirdParty/SPIRV-Headers"]
 	path = ThirdParty/SPIRV-Headers
-	url = https://github.com/DiligentGraphics/SPIRV-Headers
+	url = https://github.com/pulsaraudio/SPIRV-Headers
+
+# Other Diligent Graphics sub-modules
 [submodule "ThirdParty/googletest"]
 	path = ThirdParty/googletest
 	url = https://github.com/DiligentGraphics/googletest
-[submodule "ThirdParty/Vulkan-Headers"]
-	path = ThirdParty/Vulkan-Headers
-	url = https://github.com/DiligentGraphics/Vulkan-Headers.git
-[submodule "ThirdParty/volk"]
-	path = ThirdParty/volk
-	url = https://github.com/DiligentGraphics/volk.git
 [submodule "ThirdParty/xxHash"]
 	path = ThirdParty/xxHash
 	url = https://github.com/DiligentGraphics/xxHash
