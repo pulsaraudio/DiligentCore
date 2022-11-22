@@ -30,23 +30,23 @@
 #include "RenderDevice.h"
 #include "GraphicsAccessories.hpp"
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 #    include "D3D11/CreateObjFromNativeResD3D11.hpp"
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 #    include "D3D12/CreateObjFromNativeResD3D12.hpp"
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 #    include "GL/CreateObjFromNativeResGL.hpp"
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 #    include "Vulkan/CreateObjFromNativeResVK.hpp"
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 #    include "Metal/CreateObjFromNativeResMtl.hpp"
 #endif
 
@@ -92,33 +92,33 @@ protected:
         const auto& DeviceInfo = pDevice->GetDeviceInfo();
         switch (DeviceInfo.Type)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 pCreateObjFromNativeRes.reset(new TestCreateObjFromNativeResD3D11(pDevice));
                 break;
 
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 pCreateObjFromNativeRes.reset(new TestCreateObjFromNativeResD3D12(pDevice));
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 pCreateObjFromNativeRes.reset(new TestCreateObjFromNativeResGL(pDevice));
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 pCreateObjFromNativeRes.reset(new TestCreateObjFromNativeResVK(pDevice));
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 pCreateObjFromNativeRes.reset(new TestCreateObjFromNativeResMtl(pDevice));
                 break;

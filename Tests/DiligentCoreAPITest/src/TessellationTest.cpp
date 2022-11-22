@@ -38,23 +38,23 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 void TessellationReferenceD3D11(ISwapChain* pSwapChain);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void TessellationReferenceD3D12(ISwapChain* pSwapChain);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 void TessellationReferenceGL(ISwapChain* pSwapChain);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void TessellationReferenceVk(ISwapChain* pSwapChain);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 
 #endif
 
@@ -97,19 +97,19 @@ TEST(TessellationTest, DrawQuad)
 
         switch (DeviceInfo.Type)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 TessellationReferenceD3D11(pSwapChain);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 TessellationReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 TessellationReferenceGL(pSwapChain);
@@ -117,7 +117,7 @@ TEST(TessellationTest, DrawQuad)
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 TessellationReferenceVk(pSwapChain);
                 break;

@@ -159,7 +159,7 @@ HRESULT TestingEnvironmentD3D12::CompileDXILShader(const std::string& Source,
     return S_OK;
 }
 
-#if !D3D11_SUPPORTED
+#if !DILIGENT_D3D11_SUPPORTED
 HRESULT CompileD3DShader(const std::string&      Source,
                          LPCSTR                  strFunctionName,
                          const D3D_SHADER_MACRO* pDefines,
@@ -195,7 +195,7 @@ HRESULT CompileD3DShader(const std::string&      Source,
 
     return hr;
 }
-#endif // !D3D11_SUPPORTED
+#endif // !DILIGENT_D3D11_SUPPORTED
 
 } // namespace Testing
 

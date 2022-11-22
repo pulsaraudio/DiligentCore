@@ -41,23 +41,23 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 void ClearRenderTargetReferenceD3D11(ISwapChain* pSwapChain, const float ClearColor[]);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void ClearRenderTargetReferenceD3D12(ISwapChain* pSwapChain, const float ClearColor[]);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 void ClearRenderTargetReferenceGL(ISwapChain* pSwapChain, const float ClearColor[]);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void ClearRenderTargetReferenceVk(ISwapChain* pSwapChain, const float ClearColor[]);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 void ClearRenderTargetReferenceMtl(ISwapChain* pSwapChain, const float ClearColor[]);
 #endif
 
@@ -78,19 +78,19 @@ void ClearRenderTargetReference(IRenderDevice* pDevice,
     auto deviceType = pDevice->GetDeviceInfo().Type;
     switch (deviceType)
     {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D11:
             ClearRenderTargetReferenceD3D11(pSwapChain, ClearColor);
             break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D12:
             ClearRenderTargetReferenceD3D12(pSwapChain, ClearColor);
             break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
         case RENDER_DEVICE_TYPE_GL:
         case RENDER_DEVICE_TYPE_GLES:
             ClearRenderTargetReferenceGL(pSwapChain, ClearColor);
@@ -98,13 +98,13 @@ void ClearRenderTargetReference(IRenderDevice* pDevice,
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
         case RENDER_DEVICE_TYPE_VULKAN:
             ClearRenderTargetReferenceVk(pSwapChain, ClearColor);
             break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
         case RENDER_DEVICE_TYPE_METAL:
             ClearRenderTargetReferenceMtl(pSwapChain, ClearColor);
             break;

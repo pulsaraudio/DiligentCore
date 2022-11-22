@@ -32,19 +32,19 @@ set(SOURCE
     src/SerializedRenderPassImpl.cpp
 )
 
-if(D3D11_SUPPORTED)
+if(DILIGENT_D3D11_SUPPORTED)
     list(APPEND SOURCE src/Archiver_D3D11.cpp)
 endif()
-if(D3D12_SUPPORTED)
+if(DILIGENT_D3D12_SUPPORTED)
     list(APPEND SOURCE src/Archiver_D3D12.cpp)
 endif()
-if(VULKAN_SUPPORTED)
+if(DILIGENT_VULKAN_SUPPORTED)
     list(APPEND SOURCE src/Archiver_Vk.cpp)
 endif()
-if(GL_SUPPORTED OR GLES_SUPPORTED)
+if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED)
     list(APPEND SOURCE src/Archiver_GL.cpp)
 endif()
-if(METAL_SUPPORTED)
+if(DILIGENT_METAL_SUPPORTED)
     list(APPEND SOURCE src/Archiver_Mtl.mm)
 endif()
 
@@ -100,17 +100,17 @@ PRIVATE
     Diligent-GraphicsAccessories
 )
 
-if(D3D11_SUPPORTED)
+if(DILIGENT_D3D11_SUPPORTED)
     target_link_libraries(Diligent-Archiver-static PRIVATE Diligent-GraphicsEngineD3D11-static)
     target_include_directories(Diligent-Archiver-static PRIVATE ../GraphicsEngineD3D11/include)
 endif()
 
-if(D3D12_SUPPORTED)
+if(DILIGENT_D3D12_SUPPORTED)
     target_link_libraries(Diligent-Archiver-static PRIVATE Diligent-GraphicsEngineD3D12-static)
     target_include_directories(Diligent-Archiver-static PRIVATE ../GraphicsEngineD3D12/include)
 endif()
 
-if(VULKAN_SUPPORTED)
+if(DILIGENT_VULKAN_SUPPORTED)
     target_link_libraries(Diligent-Archiver-static PRIVATE Diligent-GraphicsEngineVk-static Vulkan::Headers)
     target_include_directories(Diligent-Archiver-static
     PRIVATE
@@ -118,7 +118,7 @@ if(VULKAN_SUPPORTED)
     )
 endif()
 
-if(GL_SUPPORTED OR GLES_SUPPORTED)
+if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED)
     target_link_libraries(Diligent-Archiver-static PRIVATE Diligent-GraphicsEngineOpenGL-static)
     target_include_directories(Diligent-Archiver-static PRIVATE ../GraphicsEngineOpenGL/include)
 
@@ -136,7 +136,7 @@ if(GL_SUPPORTED OR GLES_SUPPORTED)
     endif()
 endif()
 
-if(METAL_SUPPORTED)
+if(DILIGENT_METAL_SUPPORTED)
     target_link_libraries(Diligent-Archiver-static
     PRIVATE
     	Diligent-GraphicsEngineMetal-static

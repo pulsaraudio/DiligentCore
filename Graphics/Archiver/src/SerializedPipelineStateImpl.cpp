@@ -113,11 +113,11 @@ void SerializePSOCreateInfo(Serializer<Mode>&                                 Se
     using RayTracingShaderMapType = SerializedPipelineStateImpl::RayTracingShaderMapType;
     RayTracingShaderMapType ShaderMapVk;
     RayTracingShaderMapType ShaderMapD3D12;
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
     SerializedPipelineStateImpl::ExtractShadersVk(PSOCreateInfo, ShaderMapVk);
     VERIFY_EXPR(!ShaderMapVk.empty());
 #endif
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     SerializedPipelineStateImpl::ExtractShadersD3D12(PSOCreateInfo, ShaderMapD3D12);
     VERIFY_EXPR(!ShaderMapD3D12.empty());
 #endif
@@ -156,7 +156,7 @@ IRenderPass* RenderPassFromCI(const GraphicsPipelineStateCreateInfo& CreateInfo)
     return CreateInfo.GraphicsPipeline.pRenderPass;
 }
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 std::string GetPSODumpFolder(const std::string& Root, const PipelineStateDesc& PSODesc, ARCHIVE_DEVICE_DATA_FLAGS DeviceFlag)
 {
     std::string DumpDir{Root};
@@ -220,28 +220,28 @@ SerializedPipelineStateImpl::SerializedPipelineStateImpl(IReferenceCounters*    
         static_assert(ARCHIVE_DEVICE_DATA_FLAG_LAST == ARCHIVE_DEVICE_DATA_FLAG_METAL_IOS, "Please update the switch below to handle the new data type");
         switch (Flag)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_D3D11:
                 PatchShadersD3D11(CreateInfo);
                 break;
 #endif
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_D3D12:
                 PatchShadersD3D12(CreateInfo);
                 break;
 #endif
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_GL:
             case ARCHIVE_DEVICE_DATA_FLAG_GLES:
                 PatchShadersGL(CreateInfo);
                 break;
 #endif
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_VULKAN:
                 PatchShadersVk(CreateInfo);
                 break;
 #endif
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_METAL_MACOS:
             case ARCHIVE_DEVICE_DATA_FLAG_METAL_IOS:
                 PatchShadersMtl(CreateInfo, ArchiveDeviceDataFlagToArchiveDeviceType(Flag),
@@ -262,7 +262,7 @@ SerializedPipelineStateImpl::SerializedPipelineStateImpl(IReferenceCounters*    
     {
         if (CreateInfo.ResourceSignaturesCount == 0)
         {
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             if (ArchiveInfo.DeviceFlags & (ARCHIVE_DEVICE_DATA_FLAG_GL | ARCHIVE_DEVICE_DATA_FLAG_GLES))
             {
                 // We must add empty device signature for OpenGL after all other devices are processed,

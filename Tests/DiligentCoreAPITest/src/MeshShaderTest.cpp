@@ -38,13 +38,13 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void MeshShaderDrawReferenceD3D12(ISwapChain* pSwapChain);
 void MeshShaderIndirectDrawReferenceD3D12(ISwapChain* pSwapChain);
 void AmplificationShaderDrawReferenceD3D12(ISwapChain* pSwapChain);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void MeshShaderDrawReferenceVk(ISwapChain* pSwapChain);
 void MeshShaderIndirectDrawReferenceVk(ISwapChain* pSwapChain);
 void AmplificationShaderDrawReferenceVk(ISwapChain* pSwapChain);
@@ -83,13 +83,13 @@ TEST(MeshShaderTest, DrawTriangle)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 MeshShaderDrawReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 MeshShaderDrawReferenceVk(pSwapChain);
                 break;
@@ -190,13 +190,13 @@ TEST(MeshShaderTest, DrawTriangleIndirect)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 MeshShaderIndirectDrawReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 MeshShaderIndirectDrawReferenceVk(pSwapChain);
                 break;
@@ -335,13 +335,13 @@ TEST(MeshShaderTest, DrawTriangleIndirectCount)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 MeshShaderIndirectDrawReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 MeshShaderIndirectDrawReferenceVk(pSwapChain);
                 break;
@@ -485,13 +485,13 @@ TEST(MeshShaderTest, DrawTrisWithAmplificationShader)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 AmplificationShaderDrawReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 AmplificationShaderDrawReferenceVk(pSwapChain);
                 break;

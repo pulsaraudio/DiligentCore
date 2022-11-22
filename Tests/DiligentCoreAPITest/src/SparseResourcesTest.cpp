@@ -34,7 +34,7 @@
 #include "Align.hpp"
 #include "BasicMath.hpp"
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 namespace Diligent
 {
 namespace Testing
@@ -363,7 +363,7 @@ protected:
         Desc.MiscFlags   = (Aliasing ? MISC_TEXTURE_FLAG_SPARSE_ALIASING : MISC_TEXTURE_FLAG_NONE);
 
         TextureAndMemory Result;
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
         if (pDevice->GetDeviceInfo().IsMetalDevice())
         {
             Result.pMemory = CreateMemory(AlignUp(64u << 10, BlockSize), NumMemoryPages, nullptr);

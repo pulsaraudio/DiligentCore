@@ -25,7 +25,7 @@
  *  of the possibility of such damages.
  */
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 #    define VK_NO_PROTOTYPES
 #    include "vulkan/vulkan.h"
 #endif
@@ -47,7 +47,7 @@ namespace Testing
 
 void TestCreateObjFromNativeResVK::CreateTexture(Diligent::ITexture* pTexture)
 {
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
     RefCntAutoPtr<IRenderDeviceVk> pDeviceVk(m_pDevice, IID_RenderDeviceVk);
     RefCntAutoPtr<ITextureVk>      pTextureVk(pTexture, IID_TextureVk);
     ASSERT_NE(pDeviceVk, nullptr);
@@ -76,7 +76,7 @@ void TestCreateObjFromNativeResVK::CreateTexture(Diligent::ITexture* pTexture)
 
 void TestCreateObjFromNativeResVK::CreateBuffer(Diligent::IBuffer* pBuffer)
 {
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
     RefCntAutoPtr<IRenderDeviceVk> pDeviceVk(m_pDevice, IID_RenderDeviceVk);
     RefCntAutoPtr<IBufferVk>       pBufferVk(pBuffer, IID_BufferVk);
     ASSERT_NE(pDeviceVk, nullptr);

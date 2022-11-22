@@ -37,7 +37,7 @@ namespace Diligent
 namespace Testing
 {
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 void TileShaderDrawReferenceMtl(ISwapChain* pSwapChain);
 #endif
 
@@ -75,7 +75,7 @@ TEST(TileShaderTest, DrawQuad)
         auto DeviceType = pDevice->GetDeviceInfo().Type;
         switch (DeviceType)
         {
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 TileShaderDrawReferenceMtl(pSwapChain);
                 break;

@@ -31,7 +31,7 @@
 
 #include "GPUTestingEnvironment.hpp"
 #include "ThreadSignal.hpp"
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 #    include "D3D12/D3D12DebugLayerSetNameBugWorkaround.hpp"
 #endif
 
@@ -289,7 +289,7 @@ TEST_F(MultithreadedResourceCreationTest, CreateResources)
         GTEST_SKIP() << "Multithreading resource creation is not supported in OpenGL";
     }
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     // There is a bug in D3D12 debug layer as of build version 10.0.18362: SetName() method
     // is not protected by a mutex internally. This, in combination with the fact that root signatures are
     // de-duplicated by D3D12 runtime results in a race condition when SetName is called and causes random crashes.

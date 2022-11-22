@@ -40,27 +40,27 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 void RenderPassMSResolveReferenceD3D11(ISwapChain* pSwapChain, const float* pClearColor);
 void RenderPassInputAttachmentReferenceD3D11(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void RenderPassMSResolveReferenceD3D12(ISwapChain* pSwapChain, const float* pClearColor);
 void RenderPassInputAttachmentReferenceD3D12(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 void RenderPassMSResolveReferenceGL(ISwapChain* pSwapChain, const float* pClearColor);
 void RenderPassInputAttachmentReferenceGL(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void RenderPassMSResolveReferenceVk(ISwapChain* pSwapChain, const float* pClearColor);
 void RenderPassInputAttachmentReferenceVk(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 void RenderPassMSResolveReferenceMtl(ISwapChain* pSwapChain, const float* pClearColor);
 void RenderPassInputAttachmentReferenceMtl(ISwapChain* pSwapChain, const float* pClearColor, bool UseFramebufferFetch);
 #endif
@@ -570,19 +570,19 @@ void RenderPassTest::TestMSResolve(bool UseMemoryless)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 RenderPassMSResolveReferenceD3D11(pSwapChain, ClearColor);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RenderPassMSResolveReferenceD3D12(pSwapChain, ClearColor);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 RenderPassMSResolveReferenceGL(pSwapChain, ClearColor);
@@ -590,13 +590,13 @@ void RenderPassTest::TestMSResolve(bool UseMemoryless)
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RenderPassMSResolveReferenceVk(pSwapChain, ClearColor);
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 RenderPassMSResolveReferenceMtl(pSwapChain, ClearColor);
                 break;
@@ -731,19 +731,19 @@ void RenderPassTest::TestInputAttachment(bool UseSignature, bool UseMemoryless)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 RenderPassInputAttachmentReferenceD3D11(pSwapChain, ClearColor);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RenderPassInputAttachmentReferenceD3D12(pSwapChain, ClearColor);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 RenderPassInputAttachmentReferenceGL(pSwapChain, ClearColor);
@@ -751,13 +751,13 @@ void RenderPassTest::TestInputAttachment(bool UseSignature, bool UseMemoryless)
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RenderPassInputAttachmentReferenceVk(pSwapChain, ClearColor);
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 RenderPassInputAttachmentReferenceMtl(
                     pSwapChain, ClearColor, pDevice->GetDeviceInfo().Features.SubpassFramebufferFetch);
@@ -1046,7 +1046,7 @@ void RenderPassTest::TestInputAttachmentGeneralLayout(bool UseSignature)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RenderPassInputAttachmentReferenceVk(pSwapChain, ClearColor);
                 break;

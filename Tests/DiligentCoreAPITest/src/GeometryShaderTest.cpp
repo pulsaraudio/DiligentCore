@@ -38,23 +38,23 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 void GeometryShaderReferenceD3D11(ISwapChain* pSwapChain);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void GeometryShaderReferenceD3D12(ISwapChain* pSwapChain);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 void GeometryShaderReferenceGL(ISwapChain* pSwapChain);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void GeometryShaderReferenceVk(ISwapChain* pSwapChain);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 
 #endif
 
@@ -97,19 +97,19 @@ TEST(GeometryShaderTest, DrawTriangles)
 
         switch (DeviceInfo.Type)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 GeometryShaderReferenceD3D11(pSwapChain);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 GeometryShaderReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 GeometryShaderReferenceGL(pSwapChain);
@@ -117,7 +117,7 @@ TEST(GeometryShaderTest, DrawTriangles)
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 GeometryShaderReferenceVk(pSwapChain);
                 break;

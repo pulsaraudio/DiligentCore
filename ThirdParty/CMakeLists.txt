@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.6)
 # instead:
 set(CMAKE_POLICY_DEFAULT_CMP0063 NEW)
 
-if (GL_SUPPORTED AND (PLATFORM_WIN32 OR PLATFORM_LINUX OR PLATFORM_MACOS) AND (NOT TARGET GLEW::glew))
+if (DILIGENT_GL_SUPPORTED AND (PLATFORM_WIN32 OR PLATFORM_LINUX OR PLATFORM_MACOS) AND (NOT TARGET GLEW::glew))
     add_subdirectory(glew)
     if (DILIGENT_INSTALL_CORE)
         install(TARGETS glew-static
@@ -18,7 +18,7 @@ if (GL_SUPPORTED AND (PLATFORM_WIN32 OR PLATFORM_LINUX OR PLATFORM_MACOS) AND (N
     install(FILES glew/LICENSE.txt DESTINATION "Licenses/ThirdParty/${DILIGENT_CORE_DIR}" RENAME GLEW-License.txt)
 endif()
 
-if (VULKAN_SUPPORTED OR METAL_SUPPORTED)
+if (DILIGENT_VULKAN_SUPPORTED OR DILIGENT_METAL_SUPPORTED)
     if (NOT TARGET SPIRV-Headers)
         # Manually add the SPIRV-Headers target as this is all we need and the
         # project's CMake creates unnecessary install targets
@@ -82,7 +82,7 @@ if (VULKAN_SUPPORTED OR METAL_SUPPORTED)
     if (NOT TARGET spirv-cross-core)
         set(SPIRV_CROSS_CLI OFF CACHE BOOL "Build the CLI binary. Requires SPIRV_CROSS_STATIC.")
         set(SPIRV_CROSS_ENABLE_TESTS OFF CACHE BOOL "Enable SPIRV-Cross tests.")
-        set(SPIRV_CROSS_ENABLE_MSL ${METAL_SUPPORTED} CACHE BOOL "Enable MSL target support.")
+        set(SPIRV_CROSS_ENABLE_MSL ${DILIGENT_METAL_SUPPORTED} CACHE BOOL "Enable MSL target support.")
         # MSL support requires GLSL
         set(SPIRV_CROSS_ENABLE_GLSL ${SPIRV_CROSS_ENABLE_MSL} CACHE BOOL "Enable GLSL support.")
         set(SPIRV_CROSS_ENABLE_HLSL OFF CACHE BOOL "Enable HLSL target support.")
@@ -97,7 +97,7 @@ if (VULKAN_SUPPORTED OR METAL_SUPPORTED)
         set_directory_root_folder("SPIRV-Cross" "DiligentCore/ThirdParty/SPIRV-Cross")
 
         list(APPEND THIRD_PARTY_LIBS spirv-cross-core)
-        if (METAL_SUPPORTED)
+        if (DILIGENT_METAL_SUPPORTED)
             list(APPEND THIRD_PARTY_LIBS spirv-cross-msl spirv-cross-glsl)
         endif()
 
@@ -134,7 +134,7 @@ if (VULKAN_SUPPORTED OR METAL_SUPPORTED)
      )
 endif()
 
-if (VULKAN_SUPPORTED AND (PLATFORM_WIN32 OR PLATFORM_LINUX OR PLATFORM_MACOS OR PLATFORM_ANDROID) AND (NOT TARGET volk::volk_headers))
+if (DILIGENT_VULKAN_SUPPORTED AND (PLATFORM_WIN32 OR PLATFORM_LINUX OR PLATFORM_MACOS OR PLATFORM_ANDROID) AND (NOT TARGET volk::volk_headers))
     set(VOLK_PULL_IN_VULKAN OFF)
     set(VOLK_INSTALL OFF)
     set(VOLK_HEADERS_ONLY ON)

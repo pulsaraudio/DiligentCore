@@ -52,26 +52,26 @@ endif()
 
 set(DEPENDENCIES)
 
-if(D3D11_SUPPORTED)
+if(DILIGENT_D3D11_SUPPORTED)
     list(APPEND SOURCE src/TextureUploaderD3D11.cpp)
     list(APPEND INTERFACE interface/TextureUploaderD3D11.hpp)
     list(APPEND DEPENDENCIES Diligent-GraphicsEngineD3D11Interface)
 endif()
 
-if(D3D12_SUPPORTED)
+if(DILIGENT_D3D12_SUPPORTED)
     list(APPEND DEPENDENCIES Diligent-GraphicsEngineD3D12Interface)
 endif()
 
-if(VULKAN_SUPPORTED)
+if(DILIGENT_VULKAN_SUPPORTED)
     list(APPEND DEPENDENCIES Diligent-GraphicsEngineVkInterface Vulkan::Headers)
 endif()
 
-if(D3D12_SUPPORTED OR VULKAN_SUPPORTED)
+if(DILIGENT_D3D12_SUPPORTED OR DILIGENT_VULKAN_SUPPORTED)
     list(APPEND SOURCE src/TextureUploaderD3D12_Vk.cpp)
     list(APPEND INTERFACE interface/TextureUploaderD3D12_Vk.hpp)
 endif()
 
-if(GL_SUPPORTED OR GLES_SUPPORTED)
+if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED)
     list(APPEND SOURCE src/TextureUploaderGL.cpp)
     list(APPEND INTERFACE interface/TextureUploaderGL.hpp)
     list(APPEND DEPENDENCIES Diligent-GraphicsEngineOpenGLInterface)
@@ -106,7 +106,7 @@ if(ARCHIVER_SUPPORTED)
     )
 endif()
 
-if(D3D11_SUPPORTED OR D3D12_SUPPORTED)
+if(DILIGENT_D3D11_SUPPORTED OR DILIGENT_D3D12_SUPPORTED)
     target_link_libraries(Diligent-GraphicsTools
     PRIVATE
         Diligent-GraphicsEngineD3DBase

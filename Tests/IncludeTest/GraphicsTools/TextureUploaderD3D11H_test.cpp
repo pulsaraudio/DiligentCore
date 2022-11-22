@@ -25,6 +25,6 @@
  *  of the possibility of such damages.
  */
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 #    include "DiligentCore/Graphics/GraphicsTools/interface/TextureUploaderD3D11.hpp"
 #endif

@@ -1,19 +1,19 @@
 if(PLATFORM_WIN32 OR PLATFORM_UNIVERSAL_WINDOWS)
 
     function(copy_required_dlls TARGET_NAME)
-        if(D3D11_SUPPORTED)
+        if(DILIGENT_D3D11_SUPPORTED)
             list(APPEND ENGINE_DLLS Diligent-GraphicsEngineD3D11-shared)
         endif()
-        if(D3D12_SUPPORTED)
+        if(DILIGENT_D3D12_SUPPORTED)
             list(APPEND ENGINE_DLLS Diligent-GraphicsEngineD3D12-shared)
         endif()
-        if(GL_SUPPORTED)
+        if(DILIGENT_GL_SUPPORTED)
             list(APPEND ENGINE_DLLS Diligent-GraphicsEngineOpenGL-shared)
         endif()
-        if(VULKAN_SUPPORTED)
+        if(DILIGENT_VULKAN_SUPPORTED)
             list(APPEND ENGINE_DLLS Diligent-GraphicsEngineVk-shared)
         endif()
-        if(METAL_SUPPORTED)
+        if(DILIGENT_METAL_SUPPORTED)
             list(APPEND ENGINE_DLLS Diligent-GraphicsEngineMetal-shared)
         endif()
         if(TARGET Diligent-Archiver-shared)
@@ -29,13 +29,13 @@ if(PLATFORM_WIN32 OR PLATFORM_UNIVERSAL_WINDOWS)
 
         # Copy D3Dcompiler_47.dll, dxcompiler.dll, and dxil.dll
         if(MSVC)
-            if ((D3D11_SUPPORTED OR D3D12_SUPPORTED) AND VS_D3D_COMPILER_PATH)
+            if ((DILIGENT_D3D11_SUPPORTED OR DILIGENT_D3D12_SUPPORTED) AND VS_D3D_COMPILER_PATH)
                 # Note that VS_D3D_COMPILER_PATH can only be used in a Visual Studio command
                 # and is not a valid path during CMake configuration
                 list(APPEND SHADER_COMPILER_DLLS ${VS_D3D_COMPILER_PATH})
             endif()
 
-            if(D3D12_SUPPORTED AND VS_DXC_COMPILER_PATH AND VS_DXIL_SIGNER_PATH)
+            if(DILIGENT_D3D12_SUPPORTED AND VS_DXC_COMPILER_PATH AND VS_DXIL_SIGNER_PATH)
                 # For the compiler to sign the bytecode, you have to have a copy of dxil.dll in
                 # the same folder as the dxcompiler.dll at runtime.
 
@@ -52,14 +52,14 @@ if(PLATFORM_WIN32 OR PLATFORM_UNIVERSAL_WINDOWS)
                         "\"$<TARGET_FILE_DIR:${TARGET_NAME}>\"")
             endforeach(DLL)
 
-            if(D3D12_SUPPORTED AND EXISTS ${DILIGENT_PIX_EVENT_RUNTIME_DLL_PATH})
+            if(DILIGENT_D3D12_SUPPORTED AND EXISTS ${DILIGENT_PIX_EVENT_RUNTIME_DLL_PATH})
                 add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different
                         ${DILIGENT_PIX_EVENT_RUNTIME_DLL_PATH}
                         "\"$<TARGET_FILE_DIR:${TARGET_NAME}>\"")
             endif()
 
-            if(VULKAN_SUPPORTED)
+            if(DILIGENT_VULKAN_SUPPORTED)
                 if(NOT DEFINED DILIGENT_DXCOMPILER_FOR_SPIRV_PATH)
                     message(FATAL_ERROR "DILIGENT_DXCOMPILER_FOR_SPIRV_PATH is undefined, check order of cmake includes")
                 endif()
@@ -74,7 +74,7 @@ if(PLATFORM_WIN32 OR PLATFORM_UNIVERSAL_WINDOWS)
     endfunction()
 
     function(package_required_dlls TARGET_NAME)
-        if(D3D12_SUPPORTED AND VS_DXC_COMPILER_PATH AND VS_DXIL_SIGNER_PATH)
+        if(DILIGENT_D3D12_SUPPORTED AND VS_DXC_COMPILER_PATH AND VS_DXIL_SIGNER_PATH)
             # Copy the dlls to the project's CMake binary dir
 
             # Note that VS_DXC_COMPILER_PATH and VS_DXIL_SIGNER_PATH can only be used in a Visual Studio command
@@ -249,19 +249,19 @@ function(get_supported_backends _TARGETS)
         get_backend_libraries_type(LIB_TYPE)
     endif()
 
-    if(D3D11_SUPPORTED)
+    if(DILIGENT_D3D11_SUPPORTED)
         list(APPEND BACKENDS Diligent-GraphicsEngineD3D11-${LIB_TYPE})
     endif()
-    if(D3D12_SUPPORTED)
+    if(DILIGENT_D3D12_SUPPORTED)
         list(APPEND BACKENDS Diligent-GraphicsEngineD3D12-${LIB_TYPE})
     endif()
-    if(GL_SUPPORTED OR GLES_SUPPORTED)
+    if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED)
         list(APPEND BACKENDS Diligent-GraphicsEngineOpenGL-${LIB_TYPE})
     endif()
-    if(VULKAN_SUPPORTED)
+    if(DILIGENT_VULKAN_SUPPORTED)
         list(APPEND BACKENDS Diligent-GraphicsEngineVk-${LIB_TYPE})
     endif()
-    if(METAL_SUPPORTED)
+    if(DILIGENT_METAL_SUPPORTED)
         list(APPEND BACKENDS Diligent-GraphicsEngineMetal-${LIB_TYPE})
     endif()
     # ${_TARGETS} == ENGINE_LIBRARIES

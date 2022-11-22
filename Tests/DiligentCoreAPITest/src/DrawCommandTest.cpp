@@ -44,23 +44,23 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 void RenderDrawCommandReferenceD3D11(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void RenderDrawCommandReferenceD3D12(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 void RenderDrawCommandReferenceGL(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void RenderDrawCommandReferenceVk(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 void RenderDrawCommandReferenceMtl(ISwapChain* pSwapChain, const float* pClearColor);
 #endif
 
@@ -79,19 +79,19 @@ void RenderDrawCommandReference(ISwapChain* pSwapChain, const float* pClearColor
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 RenderDrawCommandReferenceD3D11(pSwapChain, pClearColor);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RenderDrawCommandReferenceD3D12(pSwapChain, pClearColor);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 RenderDrawCommandReferenceGL(pSwapChain, pClearColor);
@@ -99,13 +99,13 @@ void RenderDrawCommandReference(ISwapChain* pSwapChain, const float* pClearColor
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RenderDrawCommandReferenceVk(pSwapChain, pClearColor);
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 RenderDrawCommandReferenceMtl(pSwapChain, pClearColor);
                 break;

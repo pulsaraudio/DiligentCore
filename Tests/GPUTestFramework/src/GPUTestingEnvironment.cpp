@@ -37,23 +37,23 @@
 #include "StringTools.hpp"
 #include "GraphicsAccessories.hpp"
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 #    include "EngineFactoryD3D11.h"
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 #    include "EngineFactoryD3D12.h"
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 #    include "EngineFactoryOpenGL.h"
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 #    include "EngineFactoryVk.h"
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 #    include "EngineFactoryMtl.h"
 #endif
 
@@ -68,23 +68,23 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 GPUTestingEnvironment* CreateTestingEnvironmentD3D11(const GPUTestingEnvironment::CreateInfo& CI, const SwapChainDesc& SCDesc);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 GPUTestingEnvironment* CreateTestingEnvironmentD3D12(const GPUTestingEnvironment::CreateInfo& CI, const SwapChainDesc& SCDesc);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 GPUTestingEnvironment* CreateTestingEnvironmentGL(const GPUTestingEnvironment::CreateInfo& CI, const SwapChainDesc& SCDesc);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 GPUTestingEnvironment* CreateTestingEnvironmentVk(const GPUTestingEnvironment::CreateInfo& CI, const SwapChainDesc& SCDesc);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 GPUTestingEnvironment* CreateTestingEnvironmentMtl(const GPUTestingEnvironment::CreateInfo& CI, const SwapChainDesc& SCDesc);
 #endif
 
@@ -171,7 +171,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
         }
     };
 
-#if D3D12_SUPPORTED || VULKAN_SUPPORTED || METAL_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED || DILIGENT_VULKAN_SUPPORTED || DILIGENT_METAL_SUPPORTED
     auto AddContext = [&ContextCI, &Adapters](COMMAND_QUEUE_TYPE Type, const char* Name, Uint32 AdapterId) //
     {
         if (AdapterId >= Adapters.size())
@@ -218,7 +218,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
 
     switch (m_DeviceType)
     {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D11:
         {
 #    if ENGINE_DLL
@@ -261,7 +261,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
         break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D12:
         {
 #    if ENGINE_DLL
@@ -324,7 +324,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
         break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
         case RENDER_DEVICE_TYPE_GL:
         case RENDER_DEVICE_TYPE_GLES:
         {
@@ -361,7 +361,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
         break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
         case RENDER_DEVICE_TYPE_VULKAN:
         {
 #    if EXPLICITLY_LOAD_ENGINE_VK_DLL
@@ -411,7 +411,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
         break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
         case RENDER_DEVICE_TYPE_METAL:
         {
             auto* pFactoryMtl = GetEngineFactoryMtl();
@@ -877,19 +877,19 @@ GPUTestingEnvironment* GPUTestingEnvironment::Initialize(int argc, char** argv)
 
         switch (TestEnvCI.deviceType)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D11:
                 pEnv = CreateTestingEnvironmentD3D11(TestEnvCI, SCDesc);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 pEnv = CreateTestingEnvironmentD3D12(TestEnvCI, SCDesc);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case RENDER_DEVICE_TYPE_GL:
             case RENDER_DEVICE_TYPE_GLES:
                 pEnv = CreateTestingEnvironmentGL(TestEnvCI, SCDesc);
@@ -897,13 +897,13 @@ GPUTestingEnvironment* GPUTestingEnvironment::Initialize(int argc, char** argv)
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 pEnv = CreateTestingEnvironmentVk(TestEnvCI, SCDesc);
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 pEnv = CreateTestingEnvironmentMtl(TestEnvCI, SCDesc);
                 break;

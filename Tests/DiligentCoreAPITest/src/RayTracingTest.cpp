@@ -47,21 +47,21 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void RayTracingTriangleClosestHitReferenceD3D12(ISwapChain* pSwapChain);
 void RayTracingTriangleAnyHitReferenceD3D12(ISwapChain* pSwapChain);
 void RayTracingProceduralIntersectionReferenceD3D12(ISwapChain* pSwapChain);
 void RayTracingMultiGeometryReferenceD3D12(ISwapChain* pSwapChain);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void RayTracingTriangleClosestHitReferenceVk(ISwapChain* pSwapChain);
 void RayTracingTriangleAnyHitReferenceVk(ISwapChain* pSwapChain);
 void RayTracingProceduralIntersectionReferenceVk(ISwapChain* pSwapChain);
 void RayTracingMultiGeometryReferenceVk(ISwapChain* pSwapChain);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 void InlineRayTracingInComputePplnReferenceMtl(ISwapChain* pSwapChain);
 void RayTracingPRSReferenceMtl(ISwapChain* pSwapChain);
 #endif
@@ -639,13 +639,13 @@ TEST_P(RT1, TriangleClosestHitShader)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingTriangleClosestHitReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingTriangleClosestHitReferenceVk(pSwapChain);
                 break;
@@ -822,13 +822,13 @@ TEST_P(RT2, TriangleAnyHitShader)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingTriangleAnyHitReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingTriangleAnyHitReferenceVk(pSwapChain);
                 break;
@@ -1015,13 +1015,13 @@ TEST_P(RT3, ProceduralIntersection)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingProceduralIntersectionReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingProceduralIntersectionReferenceVk(pSwapChain);
                 break;
@@ -1208,13 +1208,13 @@ TEST_P(RT4, MultiGeometry)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingMultiGeometryReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingMultiGeometryReferenceVk(pSwapChain);
                 break;
@@ -1588,13 +1588,13 @@ TEST_P(RT5, InlineRayTracing_RayTracingPSO)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingTriangleClosestHitReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingTriangleClosestHitReferenceVk(pSwapChain);
                 break;
@@ -1745,13 +1745,13 @@ TEST_P(RT6, InlineRayTracing_GraphicsPSO)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingTriangleClosestHitReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingTriangleClosestHitReferenceVk(pSwapChain);
                 break;
@@ -1898,13 +1898,13 @@ TEST_P(RT7, TraceRaysIndirect)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingTriangleClosestHitReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingTriangleClosestHitReferenceVk(pSwapChain);
                 break;
@@ -2117,19 +2117,19 @@ TEST_P(RT8, InlineRayTracing_ComputePSO)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 RayTracingTriangleClosestHitReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 RayTracingTriangleClosestHitReferenceVk(pSwapChain);
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case RENDER_DEVICE_TYPE_METAL:
                 InlineRayTracingInComputePplnReferenceMtl(pSwapChain);
                 break;
@@ -2281,7 +2281,7 @@ static void RayTracingPRSTest(const int Mode)
         pContext->Flush();
         pContext->InvalidateState();
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
         RayTracingPRSReferenceMtl(pSwapChain);
 #endif
         pTestingSwapChain->TakeSnapshot();

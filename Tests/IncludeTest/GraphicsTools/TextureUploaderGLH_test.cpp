@@ -25,6 +25,6 @@
  *  of the possibility of such damages.
  */
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 #    include "DiligentCore/Graphics/GraphicsTools/interface/TextureUploaderGL.hpp"
 #endif

@@ -17,33 +17,33 @@ INTERFACE
 add_subdirectory(GraphicsAccessories)
 add_subdirectory(GraphicsEngine)
 
-if(GL_SUPPORTED OR GLES_SUPPORTED OR VULKAN_SUPPORTED)
+if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED OR DILIGENT_VULKAN_SUPPORTED)
     add_subdirectory(HLSL2GLSLConverterLib)
 endif()
 
 add_subdirectory(ShaderTools)
 
-if(D3D12_SUPPORTED OR VULKAN_SUPPORTED OR METAL_SUPPORTED)
+if(DILIGENT_D3D12_SUPPORTED OR DILIGENT_VULKAN_SUPPORTED OR DILIGENT_METAL_SUPPORTED)
     add_subdirectory(GraphicsEngineNextGenBase)
 endif()
 
-if(D3D11_SUPPORTED OR D3D12_SUPPORTED)
+if(DILIGENT_D3D11_SUPPORTED OR DILIGENT_D3D12_SUPPORTED)
     add_subdirectory(GraphicsEngineD3DBase)
 endif()
 
-if(D3D11_SUPPORTED)
+if(DILIGENT_D3D11_SUPPORTED)
     add_subdirectory(GraphicsEngineD3D11)
 endif()
 
-if(D3D12_SUPPORTED)
+if(DILIGENT_D3D12_SUPPORTED)
     add_subdirectory(GraphicsEngineD3D12)
 endif()
 
-if(VULKAN_SUPPORTED)
+if(DILIGENT_VULKAN_SUPPORTED)
     add_subdirectory(GraphicsEngineVulkan)
 endif()
 
-if(GL_SUPPORTED OR GLES_SUPPORTED)
+if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED)
     add_subdirectory(GraphicsEngineOpenGL)
 endif()
 

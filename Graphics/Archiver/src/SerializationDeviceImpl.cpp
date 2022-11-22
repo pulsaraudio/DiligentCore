@@ -39,20 +39,20 @@ namespace Diligent
 static constexpr ARCHIVE_DEVICE_DATA_FLAGS GetSupportedDeviceFlags()
 {
     ARCHIVE_DEVICE_DATA_FLAGS Flags = ARCHIVE_DEVICE_DATA_FLAG_NONE;
-#if GL_SUPPORTED
+#if DILIGENT_GL_SUPPORTED
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_GL;
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_GLES;
 #endif
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_D3D11;
 #endif
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_D3D12;
 #endif
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_VULKAN;
 #endif
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_METAL_MACOS;
     Flags = Flags | ARCHIVE_DEVICE_DATA_FLAG_METAL_IOS;
 #endif
@@ -228,28 +228,28 @@ void SerializationDeviceImpl::GetPipelineResourceBindings(const PipelineResource
 
     switch (Info.DeviceType)
     {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D11:
             GetPipelineResourceBindingsD3D11(Info, m_ResourceBindings);
             break;
 #endif
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D12:
             GetPipelineResourceBindingsD3D12(Info, m_ResourceBindings);
             break;
 #endif
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
         case RENDER_DEVICE_TYPE_GL:
         case RENDER_DEVICE_TYPE_GLES:
             GetPipelineResourceBindingsGL(Info, m_ResourceBindings);
             break;
 #endif
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
         case RENDER_DEVICE_TYPE_VULKAN:
             GetPipelineResourceBindingsVk(Info, m_ResourceBindings);
             break;
 #endif
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
         case RENDER_DEVICE_TYPE_METAL:
             GetPipelineResourceBindingsMtl(Info, m_ResourceBindings, m_MtlProps.MaxBufferFunctionArgumets);
             break;

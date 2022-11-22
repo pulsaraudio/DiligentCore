@@ -38,23 +38,23 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
 void ComputeShaderReferenceD3D11(ISwapChain* pSwapChain);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void ComputeShaderReferenceD3D12(ISwapChain* pSwapChain);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
 void ComputeShaderReferenceGL(ISwapChain* pSwapChain);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void ComputeShaderReferenceVk(ISwapChain* pSwapChain);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
 void ComputeShaderReferenceMtl(ISwapChain* pSwapChain);
 #endif
 
@@ -66,19 +66,19 @@ void ComputeShaderReference(ISwapChain* pSwapChain)
     auto deviceType = pDevice->GetDeviceInfo().Type;
     switch (deviceType)
     {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D11:
             ComputeShaderReferenceD3D11(pSwapChain);
             break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
         case RENDER_DEVICE_TYPE_D3D12:
             ComputeShaderReferenceD3D12(pSwapChain);
             break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
         case RENDER_DEVICE_TYPE_GL:
         case RENDER_DEVICE_TYPE_GLES:
             ComputeShaderReferenceGL(pSwapChain);
@@ -86,13 +86,13 @@ void ComputeShaderReference(ISwapChain* pSwapChain)
 
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
         case RENDER_DEVICE_TYPE_VULKAN:
             ComputeShaderReferenceVk(pSwapChain);
             break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
         case RENDER_DEVICE_TYPE_METAL:
             ComputeShaderReferenceMtl(pSwapChain);
             break;

@@ -79,32 +79,32 @@ SerializedShaderImpl::SerializedShaderImpl(IReferenceCounters*      pRefCounters
         static_assert(ARCHIVE_DEVICE_DATA_FLAG_LAST == ARCHIVE_DEVICE_DATA_FLAG_METAL_IOS, "Please update the switch below to handle the new device data type");
         switch (Flag)
         {
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_D3D11:
                 CreateShaderD3D11(pRefCounters, ShaderCI);
                 break;
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_D3D12:
                 CreateShaderD3D12(pRefCounters, ShaderCI);
                 break;
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_GL:
             case ARCHIVE_DEVICE_DATA_FLAG_GLES:
                 CreateShaderGL(pRefCounters, ShaderCI, Flag == ARCHIVE_DEVICE_DATA_FLAG_GL ? RENDER_DEVICE_TYPE_GL : RENDER_DEVICE_TYPE_GLES);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_VULKAN:
                 CreateShaderVk(pRefCounters, ShaderCI);
                 break;
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
             case ARCHIVE_DEVICE_DATA_FLAG_METAL_MACOS:
             case ARCHIVE_DEVICE_DATA_FLAG_METAL_IOS:
                 CreateShaderMtl(pRefCounters, ShaderCI, Flag == ARCHIVE_DEVICE_DATA_FLAG_METAL_MACOS ? DeviceType::Metal_MacOS : DeviceType::Metal_iOS);

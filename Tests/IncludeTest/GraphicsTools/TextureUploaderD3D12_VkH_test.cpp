@@ -25,6 +25,6 @@
  *  of the possibility of such damages.
  */
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 #    include "DiligentCore/Graphics/GraphicsTools/interface/TextureUploaderD3D12_Vk.hpp"
 #endif

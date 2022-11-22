@@ -48,7 +48,7 @@
 #include "RefCntAutoPtr.hpp"
 #include "ShaderToolsCommon.hpp"
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 #    include "WinHPreface.h"
 #    include <d3d12shader.h>
 #    include "WinHPostface.h"
@@ -477,7 +477,7 @@ bool DXCompilerImpl::ValidateAndSign(DxcCreateInstanceProc CreateInstance, IDxcL
     }
 }
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 class ShaderReflectionViaLibraryReflection final : public ID3D12ShaderReflection
 {
 public:
@@ -665,13 +665,13 @@ private:
     ID3D12FunctionReflection*        m_pd3d12FuncRefl = nullptr;
     std::atomic_long                 m_RefCount{0};
 };
-#endif // D3D12_SUPPORTED
+#endif // DILIGENT_D3D12_SUPPORTED
 
 
 void DXCompilerImpl::GetD3D12ShaderReflection(IDxcBlob*                pShaderBytecode,
                                               ID3D12ShaderReflection** ppShaderReflection)
 {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     try
     {
         auto CreateInstance = GetCreateInstanceProc();
@@ -711,7 +711,7 @@ void DXCompilerImpl::GetD3D12ShaderReflection(IDxcBlob*                pShaderBy
     catch (...)
     {
     }
-#endif // D3D12_SUPPORTED
+#endif // DILIGENT_D3D12_SUPPORTED
 }
 
 
@@ -845,7 +845,7 @@ bool DXCompilerImpl::RemapResourceBindings(const TResourceBindingMap& ResourceMa
                                            IDxcBlob*                  pSrcBytecode,
                                            IDxcBlob**                 ppDstByteCode)
 {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     try
     {
         auto CreateInstance = GetCreateInstanceProc();
@@ -1023,7 +1023,7 @@ bool DXCompilerImpl::RemapResourceBindings(const TResourceBindingMap& ResourceMa
     }
 #else
     return false;
-#endif // D3D12_SUPPORTED
+#endif // DILIGENT_D3D12_SUPPORTED
 }
 
 bool DXCompilerImpl::PatchDXIL(const TResourceBindingMap& ResourceMap, TExtendedResourceMap& ExtResMap, SHADER_TYPE ShaderType, String& DXIL)

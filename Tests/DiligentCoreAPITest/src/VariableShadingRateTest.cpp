@@ -38,13 +38,13 @@ namespace Diligent
 namespace Testing
 {
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 void VariableShadingRatePerDrawTestReferenceD3D12(ISwapChain* pSwapChain);
 void VariableShadingRatePerPrimitiveTestReferenceD3D12(ISwapChain* pSwapChain);
 void VariableShadingRateTextureBasedTestReferenceD3D12(ISwapChain* pSwapChain);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 void VariableShadingRatePerDrawTestReferenceVk(ISwapChain* pSwapChain);
 void VariableShadingRatePerPrimitiveTestReferenceVk(ISwapChain* pSwapChain);
 void VariableShadingRateTextureBasedTestReferenceVk(ISwapChain* pSwapChain);
@@ -182,13 +182,13 @@ TEST(VariableShadingRateTest, PerDraw)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 VariableShadingRatePerDrawTestReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 VariableShadingRatePerDrawTestReferenceVk(pSwapChain);
                 break;
@@ -300,13 +300,13 @@ TEST(VariableShadingRateTest, PerPrimitive)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 VariableShadingRatePerPrimitiveTestReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 VariableShadingRatePerPrimitiveTestReferenceVk(pSwapChain);
                 break;
@@ -446,13 +446,13 @@ TEST(VariableShadingRateTest, TextureBased)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 VariableShadingRateTextureBasedTestReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 VariableShadingRateTextureBasedTestReferenceVk(pSwapChain);
                 break;
@@ -579,13 +579,13 @@ TEST(VariableShadingRateTest, TextureBasedWithTextureArray)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 VariableShadingRateTextureBasedTestReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 VariableShadingRateTextureBasedTestReferenceVk(pSwapChain);
                 break;
@@ -759,13 +759,13 @@ TEST(VariableShadingRateTest, TextureBasedWithRenderPass)
         auto deviceType = pDevice->GetDeviceInfo().Type;
         switch (deviceType)
         {
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
             case RENDER_DEVICE_TYPE_D3D12:
                 VariableShadingRateTextureBasedTestReferenceD3D12(pSwapChain);
                 break;
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
             case RENDER_DEVICE_TYPE_VULKAN:
                 VariableShadingRateTextureBasedTestReferenceVk(pSwapChain);
                 break;

@@ -26,7 +26,7 @@
 
 #include "GraphicsUtilities.h"
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 #    include "../../GraphicsEngineVulkan/include/VulkanUtilities/VulkanHeaders.h"
 #endif
 

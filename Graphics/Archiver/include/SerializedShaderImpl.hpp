@@ -111,23 +111,23 @@ private:
                       const ShaderCreateInfo& ShaderCI,
                       const ArgTypes&... Args) noexcept(false);
 
-#if D3D11_SUPPORTED
+#if DILIGENT_D3D11_SUPPORTED
     void CreateShaderD3D11(IReferenceCounters* pRefCounters, const ShaderCreateInfo& ShaderCI) noexcept(false);
 #endif
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     void CreateShaderD3D12(IReferenceCounters* pRefCounters, const ShaderCreateInfo& ShaderCI) noexcept(false);
 #endif
 
-#if GL_SUPPORTED || GLES_SUPPORTED
+#if DILIGENT_GL_SUPPORTED || DILIGENT_GLES_SUPPORTED
     void CreateShaderGL(IReferenceCounters* pRefCounters, const ShaderCreateInfo& ShaderCI, RENDER_DEVICE_TYPE DeviceType) noexcept(false);
 #endif
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
     void CreateShaderVk(IReferenceCounters* pRefCounters, const ShaderCreateInfo& ShaderCI) noexcept(false);
 #endif
 
-#if METAL_SUPPORTED
+#if DILIGENT_METAL_SUPPORTED
     void CreateShaderMtl(IReferenceCounters* pRefCounters, const ShaderCreateInfo& ShaderCI, DeviceType Type) noexcept(false);
 #endif
 };

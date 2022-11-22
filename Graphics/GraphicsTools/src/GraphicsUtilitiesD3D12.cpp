@@ -26,7 +26,7 @@
 
 #include "GraphicsUtilities.h"
 
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
 #    include <d3d12.h>
 #    include "RenderDeviceD3D12.h"
 
@@ -40,7 +40,7 @@ namespace Diligent
 bool GetRenderDeviceD3D12MaxShaderVersion(IRenderDevice* pDevice, ShaderVersion& Version)
 {
     Version = {};
-#if D3D12_SUPPORTED
+#if DILIGENT_D3D12_SUPPORTED
     if (pDevice == nullptr)
     {
         UNEXPECTED("pDevice must not be null");

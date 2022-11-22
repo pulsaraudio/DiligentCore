@@ -34,7 +34,7 @@
 #include "GraphicsAccessories.hpp"
 #include "ResourceLayoutTestCommon.hpp"
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
 #    include "Vulkan/TestingEnvironmentVk.hpp"
 #endif
 
@@ -1670,7 +1670,7 @@ static void TestRunTimeResourceArray(bool IsGLSL, IShaderSourceInputStreamFactor
     bool SRVTextureNonUniformIndexing     = true;
     bool UAVTextureNonUniformIndexing     = true;
 
-#if VULKAN_SUPPORTED
+#if DILIGENT_VULKAN_SUPPORTED
     if (pDevice->GetDeviceInfo().IsVulkanDevice())
     {
         auto* pEnvVk                     = static_cast<TestingEnvironmentVk*>(pEnv);
