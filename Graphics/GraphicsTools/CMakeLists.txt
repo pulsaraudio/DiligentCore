@@ -41,7 +41,7 @@ set(SOURCE
     src/BytecodeCache.cpp
 )
 
-if(ARCHIVER_SUPPORTED)
+if(DILIGENT_ARCHIVER_SUPPORTED)
     list(APPEND INTERFACE
         interface/RenderStateCache.h
     )
@@ -99,7 +99,7 @@ PUBLIC
     Diligent-GraphicsEngineInterface
 )
 
-if(ARCHIVER_SUPPORTED)
+if(DILIGENT_ARCHIVER_SUPPORTED)
     target_link_libraries(Diligent-GraphicsTools
     PRIVATE
         Diligent-Archiver-static

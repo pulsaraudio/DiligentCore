@@ -57,7 +57,7 @@
 #    include "EngineFactoryMtl.h"
 #endif
 
-#if ARCHIVER_SUPPORTED
+#if DILIGENT_ARCHIVER_SUPPORTED
 #    include "ArchiverFactoryLoader.h"
 #endif
 
@@ -546,7 +546,7 @@ GPUTestingEnvironment::GPUTestingEnvironment(const CreateInfo& EnvCI, const Swap
     AdapterInfoStr += " MB.";
     LOG_INFO_MESSAGE(AdapterInfoStr);
 
-#if ARCHIVER_SUPPORTED
+#if DILIGENT_ARCHIVER_SUPPORTED
     // Create archiver factory
     {
 #    if EXPLICITLY_LOAD_ARCHIVER_FACTORY_DLL

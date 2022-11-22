@@ -36,7 +36,7 @@
 #include "SwapChain.h"
 #include "GraphicsTypesOutputInserters.hpp"
 #include "NativeWindow.h"
-#if ARCHIVER_SUPPORTED
+#if DILIGENT_ARCHIVER_SUPPORTED
 #    include "ArchiverFactory.h"
 #endif
 #include "gtest/gtest.h"
@@ -109,7 +109,7 @@ public:
         }
     };
 
-#if ARCHIVER_SUPPORTED
+#if DILIGENT_ARCHIVER_SUPPORTED
     IArchiverFactory* GetArchiverFactory()
     {
         return m_ArchiverFactory;
@@ -176,7 +176,7 @@ protected:
     // A workaround is to use SM5.0 and default shader compiler.
     bool m_NeedWARPResourceArrayIndexingBugWorkaround = false;
 
-#if ARCHIVER_SUPPORTED
+#if DILIGENT_ARCHIVER_SUPPORTED
     RefCntAutoPtr<IArchiverFactory> m_ArchiverFactory;
 #endif
 };

@@ -48,7 +48,7 @@ if(DILIGENT_GL_SUPPORTED OR DILIGENT_GLES_SUPPORTED)
 endif()
 
 
-if(ARCHIVER_SUPPORTED)
+if(DILIGENT_ARCHIVER_SUPPORTED)
     add_subdirectory(Archiver)
 endif()
 
