@@ -47,6 +47,14 @@
 
 #include "PlatformDefinitions.h"
 
+#ifndef DILIGENT_VK_USE_PORTABILITY_ENUMERATION
+#   if PLATFORM_MACOS
+#       define DILIGENT_VK_USE_PORTABILITY_ENUMERATION 1
+#   else
+#       define DILIGENT_VK_USE_PORTABILITY_ENUMERATION 0
+#   endif
+#endif
+
 namespace VulkanUtilities
 {
 
@@ -254,15 +262,11 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
 #endif
     };
 
-#if PLATFORM_MACOS
     // Beginning with the 1.3.216 Vulkan SDK, the Vulkan Loader is strictly
     // enforcing the new VK_KHR_PORTABILITY_subset extension.
-    constexpr bool UsePortabilityEnumeartion = true;
-#else
-    constexpr bool UsePortabilityEnumeartion = false;
-#endif
+    constexpr bool UsePortabilityEnumeration = static_cast<bool>(DILIGENT_VK_USE_PORTABILITY_ENUMERATION);
 
-    if (UsePortabilityEnumeartion)
+    if (UsePortabilityEnumeration)
         InstanceExtensions.push_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
 
     // This extension added to core in 1.1, but current version is 1.0
@@ -420,7 +424,7 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
     InstanceCreateInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
     InstanceCreateInfo.pNext = nullptr; // Pointer to an extension-specific structure.
     InstanceCreateInfo.flags = 0;
-    if (UsePortabilityEnumeartion)
+    if (UsePortabilityEnumeration)
     {
         // The instance will enumerate available Vulkan Portability-compliant physical
         // devices and groups in addition to the Vulkan physical devices and groups that
