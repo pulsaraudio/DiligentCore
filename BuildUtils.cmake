@@ -131,7 +131,7 @@ function(set_common_target_properties TARGET)
     set_target_properties(${TARGET} PROPERTIES
         # It is crucial to set CXX_STANDARD flag to only affect c++ files and avoid failures compiling c-files:
         # error: invalid argument '-std=c++14' not allowed with 'C/ObjC'
-        CXX_STANDARD 14
+        CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
     )
 
@@ -416,5 +416,3 @@ function(add_format_validation_target MODULE_NAME MODULE_ROOT_PATH IDE_FOLDER)
     endif()
 
 endfunction()
-
-
