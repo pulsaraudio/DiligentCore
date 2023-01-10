@@ -33,30 +33,70 @@
 
 DILIGENT_BEGIN_NAMESPACE(Diligent)
 
+// clang-format off
+
+/// Render state cache logging level.
+DILIGENT_TYPED_ENUM(RENDER_STATE_CACHE_LOG_LEVEL, Uint8)
+{
+    /// Logging is disabled.
+    RENDER_STATE_CACHE_LOG_LEVEL_DISABLED,
+
+    /// Normal logging level.
+    RENDER_STATE_CACHE_LOG_LEVEL_NORMAL,
+
+    /// Verbose logging level.
+    RENDER_STATE_CACHE_LOG_LEVEL_VERBOSE
+};
+
+// clang-format on
+
 /// Render state cache create information.
 struct RenderStateCacheCreateInfo
 {
     /// A pointer to the render device, must not be null.
     IRenderDevice* pDevice DEFAULT_INITIALIZER(nullptr);
 
-    /// Whether to log the cache usage events such as
-    /// if the object was found in the cache or not.
-    bool EnableLogging DEFAULT_INITIALIZER(false);
+    /// Logging level, see Diligent::RENDER_STATE_CACHE_LOG_LEVEL.
+    RENDER_STATE_CACHE_LOG_LEVEL LogLevel DEFAULT_INITIALIZER(RENDER_STATE_CACHE_LOG_LEVEL_NORMAL);
+
+    /// Whether to enable hot shader and pipeline state reloading.
+    ///
+    /// \note   Hot reloading introduces some overhead and should
+    ///         generally be disabled in production builds.
+    bool EnableHotReload DEFAULT_INITIALIZER(false);
+
+    /// Optional shader source input stream factory to use when reloading
+    /// shaders. If null, original source factory will be used.
+    IShaderSourceInputStreamFactory* pReloadSource DEFAULT_INITIALIZER(nullptr);
 
 #if DILIGENT_CPP_INTERFACE
     constexpr RenderStateCacheCreateInfo() noexcept
     {}
 
     constexpr explicit RenderStateCacheCreateInfo(
-        IRenderDevice* _pDevice,
-        bool           _EnableLogging = RenderStateCacheCreateInfo{}.EnableLogging) noexcept :
+        IRenderDevice*                   _pDevice,
+        RENDER_STATE_CACHE_LOG_LEVEL     _LogLevel        = RenderStateCacheCreateInfo{}.LogLevel,
+        bool                             _EnableHotReload = RenderStateCacheCreateInfo{}.EnableHotReload,
+        IShaderSourceInputStreamFactory* _pReloadSource   = RenderStateCacheCreateInfo{}.pReloadSource) noexcept :
         pDevice{_pDevice},
-        EnableLogging{_EnableLogging}
+        LogLevel{_LogLevel},
+        EnableHotReload{_EnableHotReload},
+        pReloadSource{_pReloadSource}
     {}
 #endif
 };
 typedef struct RenderStateCacheCreateInfo RenderStateCacheCreateInfo;
 
+#if DILIGENT_C_INTERFACE
+#    define REF *
+#else
+#    define REF &
+#endif
+
+/// Type of the callback function called by the IRenderStateCache::Reload method.
+typedef void(DILIGENT_CALL_TYPE* ReloadGraphicsPipelineCallbackType)(const char* PipelineName, GraphicsPipelineDesc REF GraphicsDesc, void* pUserData);
+
+#undef REF
 
 // clang-format on
 
@@ -161,6 +201,21 @@ DILIGENT_BEGIN_INTERFACE(IRenderStateCache, IObject)
 
     /// Resets the cache to default state.
     VIRTUAL void METHOD(Reset)(THIS) PURE;
+
+    /// Reloads render states in the cache.
+
+    /// \param [in]  ReloadGraphicsPipeline - An optional callback function that will be called by the render state cache
+    ///                                       to let the application modify graphics pipeline state info before creating new
+    ///                                       pipeline.
+    /// \param [in]  pUserData              - A pointer to the user-specific data to pass to ReloadGraphicsPipeline callback.
+    ///
+    /// \return     The total number of render states (shaders and pipelines) that were reloaded.
+    ///
+    /// \remars     Reloading is only enabled if the cache was created with the EnableHotReload member of
+    ///             RenderStateCacheCreateInfo member set to true.
+    VIRTUAL Uint32 METHOD(Reload)(THIS_
+                                  ReloadGraphicsPipelineCallbackType ReloadGraphicsPipeline DEFAULT_VALUE(nullptr), 
+                                  void*                              pUserData              DEFAULT_VALUE(nullptr)) PURE;
 };
 DILIGENT_END_INTERFACE
 
@@ -178,6 +233,7 @@ DILIGENT_END_INTERFACE
 #    define IRenderStateCache_WriteToBlob(This, ...)                   CALL_IFACE_METHOD(RenderStateCache, WriteToBlob,                  This, __VA_ARGS__)
 #    define IRenderStateCache_WriteToStream(This, ...)                 CALL_IFACE_METHOD(RenderStateCache, WriteToStream,                This, __VA_ARGS__)
 #    define IRenderStateCache_Reset(This)                              CALL_IFACE_METHOD(RenderStateCache, Reset,                        This)
+#    define IRenderStateCache_Reload(This, ...)                        CALL_IFACE_METHOD(RenderStateCache, Reload,                       This, __VA_ARGS__)
 // clang-format on
 
 #endif

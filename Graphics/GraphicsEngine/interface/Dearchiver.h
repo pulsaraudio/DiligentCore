@@ -49,7 +49,7 @@ struct ShaderUnpackInfo
     struct IRenderDevice* pDevice DEFAULT_INITIALIZER(nullptr);
 
     /// Name of the shader to unpack.
-    const char* Name DEFAULT_INITIALIZER(nullptr);
+    const Char* Name DEFAULT_INITIALIZER(nullptr);
 
     /// An optional function to be called by the dearchiver to let the application modify
     /// the shader description.
@@ -68,7 +68,7 @@ struct ResourceSignatureUnpackInfo
 
     /// Name of the signature to unpack. If there is only
     /// one signature in the archive, the name may be null.
-    const char* Name DEFAULT_INITIALIZER(nullptr);
+    const Char* Name DEFAULT_INITIALIZER(nullptr);
 
     /// Shader resource binding allocation granularity.
 
@@ -127,7 +127,7 @@ struct PipelineStateUnpackInfo
 
     /// Name of the PSO to unpack. If there is only
     /// one PSO in the archive, the name may be null.
-    const char* Name DEFAULT_INITIALIZER(nullptr);
+    const Char* Name DEFAULT_INITIALIZER(nullptr);
 
     /// The type of the pipeline state to unpack, see Diligent::PIPELINE_TYPE.
     PIPELINE_TYPE PipelineType DEFAULT_INITIALIZER(PIPELINE_TYPE_INVALID);
@@ -187,7 +187,7 @@ struct RenderPassUnpackInfo
     struct IRenderDevice* pDevice DEFAULT_INITIALIZER(nullptr);
 
     /// Name of the render pass to unpack.
-    const char* Name DEFAULT_INITIALIZER(nullptr);
+    const Char* Name DEFAULT_INITIALIZER(nullptr);
 
     /// An optional function to be called by the dearchiver to let the application modify
     /// the render pass description.
@@ -236,9 +236,9 @@ DILIGENT_BEGIN_INTERFACE(IDearchiver, IObject)
     /// 
     /// \warning    This method is not thread-safe and must not be called simultaneously
     ///             with other methods.
-    VIRTUAL bool METHOD(LoadArchive)(THIS_
+    VIRTUAL Bool METHOD(LoadArchive)(THIS_
                                      const IDataBlob* pArchive,
-                                     bool             MakeCopy DEFAULT_VALUE(false)) PURE;
+                                     Bool             MakeCopy DEFAULT_VALUE(false)) PURE;
 
     /// Unpacks a shader from the device object archive.
 
@@ -303,7 +303,7 @@ DILIGENT_BEGIN_INTERFACE(IDearchiver, IObject)
     ///
     /// \warning    This method is not thread-safe and must not be called simultaneously
     ///             with other methods.
-    VIRTUAL bool METHOD(Store)(THIS_
+    VIRTUAL Bool METHOD(Store)(THIS_
                                IDataBlob** ppArchive) CONST PURE;
 
     /// Resets the dearchiver state and releases all loaded objects.

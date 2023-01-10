@@ -44,6 +44,7 @@ set(SOURCE
 if(DILIGENT_ARCHIVER_SUPPORTED)
     list(APPEND INTERFACE
         interface/RenderStateCache.h
+        interface/RenderStateCache.hpp
     )
     list(APPEND SOURCE
         src/RenderStateCache.cpp
@@ -93,6 +94,7 @@ PRIVATE
     Diligent-PlatformInterface
     Diligent-GraphicsAccessories
     Diligent-ShaderTools
+    Diligent-GraphicsEngine
     xxHash::xxhash
     ${DEPENDENCIES}
 PUBLIC

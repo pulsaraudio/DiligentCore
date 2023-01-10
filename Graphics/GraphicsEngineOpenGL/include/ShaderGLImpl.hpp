@@ -41,6 +41,9 @@ class ShaderGLImpl final : public ShaderBase<EngineGLImplTraits>
 public:
     using TShaderBase = ShaderBase<EngineGLImplTraits>;
 
+    static constexpr INTERFACE_ID IID_InternalImpl =
+        {0xa62b7e6a, 0x566b, 0x4c8d, {0xbd, 0xe0, 0x2f, 0x63, 0xcf, 0xca, 0x78, 0xc8}};
+
     struct CreateInfo
     {
         const RenderDeviceInfo&    DeviceInfo;
@@ -76,7 +79,7 @@ public:
     }
 
 private:
-    const SHADER_SOURCE_LANGUAGE             m_SourceLanguage;
+    SHADER_SOURCE_LANGUAGE                   m_SourceLanguage = SHADER_SOURCE_LANGUAGE_DEFAULT;
     std::string                              m_GLSLSourceString;
     GLObjectWrappers::GLShaderObj            m_GLShaderObj;
     std::shared_ptr<const ShaderResourcesGL> m_pShaderResources;

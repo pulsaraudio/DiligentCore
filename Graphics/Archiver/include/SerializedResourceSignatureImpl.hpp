@@ -63,7 +63,7 @@ public:
 
     ~SerializedResourceSignatureImpl() override;
 
-    virtual void DILIGENT_CALL_TYPE QueryInterface(const INTERFACE_ID& IID, IObject** ppInterface) override final;
+    IMPLEMENT_QUERY_INTERFACE2_IN_PLACE(IID_SerializedResourceSignature, IID_PipelineResourceSignature, TBase)
 
     virtual const PipelineResourceSignatureDesc& DILIGENT_CALL_TYPE GetDesc() const override final;
 
@@ -74,6 +74,7 @@ public:
     UNSUPPORTED_METHOD      (IShaderResourceVariable*, GetStaticVariableByIndex, SHADER_TYPE ShaderType, Uint32 Index)
     UNSUPPORTED_CONST_METHOD(Uint32,   GetStaticVariableCount,       SHADER_TYPE ShaderType)
     UNSUPPORTED_CONST_METHOD(void,     InitializeStaticSRBResources, IShaderResourceBinding* pShaderResourceBinding)
+    UNSUPPORTED_CONST_METHOD(void,     CopyStaticResources,          IPipelineResourceSignature* pPRS)
     UNSUPPORTED_CONST_METHOD(bool,     IsCompatibleWith,             const IPipelineResourceSignature* pPRS)
     UNSUPPORTED_CONST_METHOD(Int32,    GetUniqueID)
     UNSUPPORTED_METHOD      (void,     SetUserData, IObject* pUserData)

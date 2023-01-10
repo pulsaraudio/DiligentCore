@@ -373,7 +373,7 @@ typedef struct GraphicsPipelineDesc GraphicsPipelineDesc;
 struct RayTracingGeneralShaderGroup
 {
     /// Unique group name.
-    const char* Name    DEFAULT_INITIALIZER(nullptr);
+    const Char* Name    DEFAULT_INITIALIZER(nullptr);
 
     /// Shader type must be SHADER_TYPE_RAY_GEN, SHADER_TYPE_RAY_MISS or SHADER_TYPE_CALLABLE.
     IShader*    pShader DEFAULT_INITIALIZER(nullptr);
@@ -382,7 +382,7 @@ struct RayTracingGeneralShaderGroup
     constexpr RayTracingGeneralShaderGroup() noexcept
     {}
 
-    constexpr RayTracingGeneralShaderGroup(const char* _Name,
+    constexpr RayTracingGeneralShaderGroup(const Char* _Name,
                                            IShader*    _pShader) noexcept:
         Name   {_Name   },
         pShader{_pShader}
@@ -404,7 +404,7 @@ typedef struct RayTracingGeneralShaderGroup RayTracingGeneralShaderGroup;
 struct RayTracingTriangleHitShaderGroup
 {
     /// Unique group name.
-    const char* Name              DEFAULT_INITIALIZER(nullptr);
+    const Char* Name              DEFAULT_INITIALIZER(nullptr);
 
     /// Closest hit shader.
     /// The shader type must be SHADER_TYPE_RAY_CLOSEST_HIT.
@@ -418,7 +418,7 @@ struct RayTracingTriangleHitShaderGroup
     constexpr RayTracingTriangleHitShaderGroup() noexcept
     {}
 
-    constexpr RayTracingTriangleHitShaderGroup(const char* _Name,
+    constexpr RayTracingTriangleHitShaderGroup(const Char* _Name,
                                                IShader*    _pClosestHitShader,
                                                IShader*    _pAnyHitShader    = nullptr) noexcept:
         Name             {_Name             },
@@ -444,7 +444,7 @@ typedef struct RayTracingTriangleHitShaderGroup RayTracingTriangleHitShaderGroup
 struct RayTracingProceduralHitShaderGroup
 {
     /// Unique group name.
-    const char* Name                DEFAULT_INITIALIZER(nullptr);
+    const Char* Name                DEFAULT_INITIALIZER(nullptr);
 
     /// Intersection shader.
     /// The shader type must be SHADER_TYPE_RAY_INTERSECTION.
@@ -462,7 +462,7 @@ struct RayTracingProceduralHitShaderGroup
     constexpr RayTracingProceduralHitShaderGroup() noexcept
     {}
 
-    constexpr RayTracingProceduralHitShaderGroup(const char* _Name,
+    constexpr RayTracingProceduralHitShaderGroup(const Char* _Name,
                                                  IShader*    _pIntersectionShader,
                                                  IShader*    _pClosestHitShader  = nullptr,
                                                  IShader*    _pAnyHitShader      = nullptr) noexcept:
@@ -822,7 +822,7 @@ struct RayTracingPipelineStateCreateInfo DILIGENT_DERIVE(PipelineStateCreateInfo
     /// Direct3D12 only: the name of the constant buffer that will be used by the local root signature.
     /// Ignored if RayTracingPipelineDesc::ShaderRecordSize is zero.
     /// In Vulkan backend in HLSL add [[vk::shader_record_ext]] attribute to the constant buffer, in GLSL add shaderRecord layout to buffer.
-    const char*                               pShaderRecordName        DEFAULT_INITIALIZER(nullptr);
+    const Char*                               pShaderRecordName        DEFAULT_INITIALIZER(nullptr);
 
     /// Direct3D12 only: the maximum hit shader attribute size in bytes.
     /// If zero then maximum allowed size will be used.
@@ -1068,7 +1068,7 @@ DILIGENT_BEGIN_INTERFACE(IPipelineState, IDeviceObject)
     ///             IPipelineResourceSignature::CreateShaderResourceBinding() method.
     VIRTUAL void METHOD(CreateShaderResourceBinding)(THIS_
                                                      IShaderResourceBinding** ppShaderResourceBinding,
-                                                     bool                     InitStaticResources DEFAULT_VALUE(false)) PURE;
+                                                     Bool                     InitStaticResources DEFAULT_VALUE(false)) PURE;
 
 
 
@@ -1092,6 +1092,20 @@ DILIGENT_BEGIN_INTERFACE(IPipelineState, IDeviceObject)
     ///             IPipelineResourceSignature::InitializeStaticSRBResources() method.
     VIRTUAL void METHOD(InitializeStaticSRBResources)(THIS_
                                                       struct IShaderResourceBinding* pShaderResourceBinding) CONST PURE;
+
+
+    /// Copies static resource bindings to the destination pipeline.
+
+    /// \param [in] pDstPipeline - Destination pipeline state.
+    ///
+    /// \note   Destination pipeline state must be compatible with this pipeline.
+    ///
+    /// \remarks    This method is only allowed for pipelines that use implicit resource signature
+    ///             (e.g. shader resources are defined through ResourceLayout member of the pipeline desc).
+    ///             For pipelines that use explicit resource signatures, use
+    ///             IPipelineResourceSignature::CopyStaticResources() method.
+    VIRTUAL void METHOD(CopyStaticResources)(THIS_
+                                             IPipelineState* pDstPipeline) CONST PURE;
 
 
     /// Checks if this pipeline state object is compatible with another PSO
@@ -1155,6 +1169,7 @@ DILIGENT_END_INTERFACE
 #    define IPipelineState_GetStaticVariableByIndex(This, ...)     CALL_IFACE_METHOD(PipelineState, GetStaticVariableByIndex,     This, __VA_ARGS__)
 #    define IPipelineState_CreateShaderResourceBinding(This, ...)  CALL_IFACE_METHOD(PipelineState, CreateShaderResourceBinding,  This, __VA_ARGS__)
 #    define IPipelineState_InitializeStaticSRBResources(This, ...) CALL_IFACE_METHOD(PipelineState, InitializeStaticSRBResources, This, __VA_ARGS__)
+#    define IPipelineState_CopyStaticResources(This, ...)          CALL_IFACE_METHOD(PipelineState, CopyStaticResources,          This, __VA_ARGS__)
 #    define IPipelineState_IsCompatibleWith(This, ...)             CALL_IFACE_METHOD(PipelineState, IsCompatibleWith,             This, __VA_ARGS__)
 #    define IPipelineState_GetResourceSignatureCount(This)         CALL_IFACE_METHOD(PipelineState, GetResourceSignatureCount,    This)
 #    define IPipelineState_GetResourceSignature(This, ...)         CALL_IFACE_METHOD(PipelineState, GetResourceSignature,         This, __VA_ARGS__)

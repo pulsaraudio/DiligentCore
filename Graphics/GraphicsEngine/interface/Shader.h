@@ -136,7 +136,7 @@ struct ShaderDesc DILIGENT_DERIVE(DeviceObjectAttribs)
     /// shader variables.
     ///
     /// This member has no effect if the shader is used in the PSO that uses pipeline resource signature(s).
-    bool UseCombinedTextureSamplers DEFAULT_INITIALIZER(false);
+    Bool UseCombinedTextureSamplers DEFAULT_INITIALIZER(false);
 
     /// If UseCombinedTextureSamplers is true, defines the suffix added to the
     /// texture variable name to get corresponding sampler name.  For example,
@@ -152,8 +152,8 @@ struct ShaderDesc DILIGENT_DERIVE(DeviceObjectAttribs)
 
     constexpr ShaderDesc(const Char* _Name,
                          SHADER_TYPE _ShaderType,
-                         bool        _UseCombinedTextureSamplers = ShaderDesc{}.UseCombinedTextureSamplers,
-                         const char* _CombinedSamplerSuffix      = ShaderDesc{}.CombinedSamplerSuffix) :
+                         Bool        _UseCombinedTextureSamplers = ShaderDesc{}.UseCombinedTextureSamplers,
+                         const Char* _CombinedSamplerSuffix      = ShaderDesc{}.CombinedSamplerSuffix) :
         DeviceObjectAttribs{_Name},
         ShaderType                {_ShaderType},
         UseCombinedTextureSamplers{_UseCombinedTextureSamplers},
@@ -511,7 +511,7 @@ struct ShaderResourceDesc
 {
     // clang-format off
     /// Shader resource name
-    const char*          Name      DEFAULT_INITIALIZER(nullptr);
+    const Char*          Name      DEFAULT_INITIALIZER(nullptr);
 
     /// Shader resource type, see Diligent::SHADER_RESOURCE_TYPE.
     SHADER_RESOURCE_TYPE Type      DEFAULT_INITIALIZER(SHADER_RESOURCE_TYPE_UNKNOWN);
@@ -524,7 +524,7 @@ struct ShaderResourceDesc
     constexpr ShaderResourceDesc() noexcept
     {}
 
-    constexpr ShaderResourceDesc(const char*          _Name,
+    constexpr ShaderResourceDesc(const Char*          _Name,
                                  SHADER_RESOURCE_TYPE _Type,
                                  Uint32               _ArraySize) noexcept :
         Name{_Name},

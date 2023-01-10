@@ -47,6 +47,8 @@
 namespace Diligent
 {
 
+constexpr INTERFACE_ID PipelineStateD3D11Impl::IID_InternalImpl;
+
 __forceinline SHADER_TYPE GetShaderStageType(const ShaderD3D11Impl* pShader)
 {
     return pShader->GetDesc().ShaderType;
@@ -380,7 +382,7 @@ void PipelineStateD3D11Impl::Destruct()
     TPipelineStateBase::Destruct();
 }
 
-IMPLEMENT_QUERY_INTERFACE(PipelineStateD3D11Impl, IID_PipelineStateD3D11, TPipelineStateBase)
+IMPLEMENT_QUERY_INTERFACE2(PipelineStateD3D11Impl, IID_PipelineStateD3D11, IID_InternalImpl, TPipelineStateBase)
 
 
 bool PipelineStateD3D11Impl::IsCompatibleWith(const IPipelineState* pPSO) const
@@ -388,7 +390,10 @@ bool PipelineStateD3D11Impl::IsCompatibleWith(const IPipelineState* pPSO) const
     if (!TPipelineStateBase::IsCompatibleWith(pPSO))
         return false;
 
-    const auto& rhs = *ClassPtrCast<const PipelineStateD3D11Impl>(pPSO);
+    RefCntAutoPtr<PipelineStateD3D11Impl> pPSOImpl{const_cast<IPipelineState*>(pPSO), PipelineStateImplType::IID_InternalImpl};
+    VERIFY(pPSOImpl, "Unknown PSO implementation type");
+
+    const auto& rhs = *pPSOImpl;
     if (m_ActiveShaderStages != rhs.m_ActiveShaderStages)
         return false;
 

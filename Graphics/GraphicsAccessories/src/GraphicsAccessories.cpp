@@ -840,7 +840,7 @@ const Char* GetBindFlagString(Uint32 BindFlag)
 {
     VERIFY(BindFlag == BIND_NONE || IsPowerOfTwo(BindFlag), "More than one bind flag is specified");
 
-    static_assert(BIND_FLAGS_LAST == 0x800L, "Please handle the new bind flag in the switch below");
+    static_assert(BIND_FLAG_LAST == 0x800L, "Please handle the new bind flag in the switch below");
     switch (BindFlag)
     {
 #define BIND_FLAG_STR_CASE(Flag) \
@@ -868,7 +868,7 @@ String GetBindFlagsString(Uint32 BindFlags, const char* Delimiter)
     if (BindFlags == 0)
         return "0";
     String Str;
-    for (Uint32 Flag = 1; BindFlags && Flag <= BIND_FLAGS_LAST; Flag <<= 1)
+    for (Uint32 Flag = 1; BindFlags && Flag <= BIND_FLAG_LAST; Flag <<= 1)
     {
         if (BindFlags & Flag)
         {
@@ -1258,6 +1258,24 @@ const char* GetRenderDeviceTypeString(RENDER_DEVICE_TYPE DeviceType, bool bGetEn
         case RENDER_DEVICE_TYPE_GLES:      return bGetEnumString ? "RENDER_DEVICE_TYPE_GLES"      : "OpenGLES";   break;
         case RENDER_DEVICE_TYPE_VULKAN:    return bGetEnumString ? "RENDER_DEVICE_TYPE_VULKAN"    : "Vulkan";     break;
         case RENDER_DEVICE_TYPE_METAL:     return bGetEnumString ? "RENDER_DEVICE_TYPE_METAL"     : "Metal";      break;
+        // clang-format on
+        default: UNEXPECTED("Unknown/unsupported device type"); return "UNKNOWN";
+    }
+}
+
+const char* GetRenderDeviceTypeShortString(RENDER_DEVICE_TYPE DeviceType, bool Capital)
+{
+    static_assert(RENDER_DEVICE_TYPE_COUNT == 7, "Did you add a new device type? Please update the switch below.");
+    switch (DeviceType)
+    {
+        // clang-format off
+        case RENDER_DEVICE_TYPE_UNDEFINED: return Capital ? "UNDEFINED" : "undefined"; break;
+        case RENDER_DEVICE_TYPE_D3D11:     return Capital ? "D3D11"     : "d3d11";     break;
+        case RENDER_DEVICE_TYPE_D3D12:     return Capital ? "D3D12"     : "d3d12";     break;
+        case RENDER_DEVICE_TYPE_GL:        return Capital ? "GL"        : "gl";        break;
+        case RENDER_DEVICE_TYPE_GLES:      return Capital ? "GLES"      : "gles";      break;
+        case RENDER_DEVICE_TYPE_VULKAN:    return Capital ? "VK"        : "vk";        break;
+        case RENDER_DEVICE_TYPE_METAL:     return Capital ? "MTL"       : "mtl";       break;
         // clang-format on
         default: UNEXPECTED("Unknown/unsupported device type"); return "UNKNOWN";
     }

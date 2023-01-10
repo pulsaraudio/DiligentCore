@@ -22,11 +22,11 @@
 [submodule "ThirdParty/SPIRV-Headers"]
 	path = ThirdParty/SPIRV-Headers
 	url = https://github.com/pulsaraudio/SPIRV-Headers
+[submodule "ThirdParty/xxHash"]
+	path = ThirdParty/xxHash
+	url = https://github.com/pulsaraudio/xxHash
 
 # Other Diligent Graphics sub-modules
 [submodule "ThirdParty/googletest"]
 	path = ThirdParty/googletest
 	url = https://github.com/DiligentGraphics/googletest
-[submodule "ThirdParty/xxHash"]
-	path = ThirdParty/xxHash
-	url = https://github.com/DiligentGraphics/xxHash

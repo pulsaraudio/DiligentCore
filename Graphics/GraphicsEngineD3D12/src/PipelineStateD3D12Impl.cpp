@@ -58,6 +58,8 @@
 namespace Diligent
 {
 
+constexpr INTERFACE_ID PipelineStateD3D12Impl::IID_InternalImpl;
+
 namespace
 {
 #ifdef _MSC_VER
@@ -149,12 +151,13 @@ void BuildRTPipelineDescription(const RayTracingPipelineStateCreateInfo& CreateI
             auto&       ShaderIndex = ShaderIndices[StageIdx];
 
             // shaders must be in same order as in ExtractShaders()
-            VERIFY_EXPR(Stage.Shaders[ShaderIndex] == pShader);
+            RefCntAutoPtr<ShaderD3D12Impl> pShaderD3D12{pShader, ShaderD3D12Impl::IID_InternalImpl};
+            VERIFY(pShaderD3D12, "Unexpected shader object implementation");
+            VERIFY_EXPR(Stage.Shaders[ShaderIndex] == pShaderD3D12);
 
-            auto&       LibDesc      = *TempPool.Construct<D3D12_DXIL_LIBRARY_DESC>();
-            auto&       ExportDesc   = *TempPool.Construct<D3D12_EXPORT_DESC>();
-            const auto* pShaderD3D12 = ClassPtrCast<ShaderD3D12Impl>(pShader);
-            const auto& pBlob        = Stage.ByteCodes[ShaderIndex];
+            auto&       LibDesc    = *TempPool.Construct<D3D12_DXIL_LIBRARY_DESC>();
+            auto&       ExportDesc = *TempPool.Construct<D3D12_EXPORT_DESC>();
+            const auto& pBlob      = Stage.ByteCodes[ShaderIndex];
             ++ShaderIndex;
 
             LibDesc.DXILLibrary.BytecodeLength  = pBlob->GetBufferSize();
@@ -1014,7 +1017,10 @@ bool PipelineStateD3D12Impl::IsCompatibleWith(const IPipelineState* pPSO) const
     if (pPSO == this)
         return true;
 
-    bool IsCompatible = (m_RootSig == ClassPtrCast<const PipelineStateD3D12Impl>(pPSO)->m_RootSig);
+    RefCntAutoPtr<PipelineStateD3D12Impl> pPSOImpl{const_cast<IPipelineState*>(pPSO), PipelineStateImplType::IID_InternalImpl};
+    VERIFY(pPSOImpl, "Unknown PSO implementation type");
+
+    bool IsCompatible = (m_RootSig == pPSOImpl->m_RootSig);
     VERIFY_EXPR(IsCompatible == TPipelineStateBase::IsCompatibleWith(pPSO));
     return IsCompatible;
 }
