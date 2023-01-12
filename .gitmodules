@@ -1,30 +1,33 @@
+# Please use the git@github.com:pulsaraudio format to allow pulsar SSH authentication
+# The https://github.com/XXX format is allowed only for external repositories that we don't modify
+
 # Diligent Graphics sub-modules shared with MoltenVK
 # They are forked to our repository from the original KhronosGroup repo
 # instead of DiligentGraphics's own forks because MoltenVK may use more recent
 # revisions.
 [submodule "ThirdParty/glslang"]
 	path = ThirdParty/glslang
-	url = https://github.com/pulsaraudio/glslang
+	url = git@github.com:pulsaraudio/glslang.git
 [submodule "ThirdParty/SPIRV-Cross"]
 	path = ThirdParty/SPIRV-Cross
-	url = https://github.com/pulsaraudio/SPIRV-Cross
+	url = git@github.com:pulsaraudio/SPIRV-Cross.git
 [submodule "ThirdParty/Vulkan-Headers"]
-		path = ThirdParty/Vulkan-Headers
-		url = https://github.com/pulsaraudio/Vulkan-Headers
+	path = ThirdParty/Vulkan-Headers
+	url = git@github.com:pulsaraudio/Vulkan-Headers.git
 
 # Diligent Graphics sub-modules potentially modified by us
 [submodule "ThirdParty/volk"]
-			path = ThirdParty/volk
-			url = https://github.com/pulsaraudio/volk
+	path = ThirdParty/volk
+	url = git@github.com:pulsaraudio/volk.git
 [submodule "ThirdParty/SPIRV-Tools"]
 	path = ThirdParty/SPIRV-Tools
-	url = https://github.com/pulsaraudio/SPIRV-Tools
+	url = git@github.com:pulsaraudio/SPIRV-Tools.git
 [submodule "ThirdParty/SPIRV-Headers"]
 	path = ThirdParty/SPIRV-Headers
-	url = https://github.com/pulsaraudio/SPIRV-Headers
+	url = git@github.com:pulsaraudio/SPIRV-Headers.git
 [submodule "ThirdParty/xxHash"]
 	path = ThirdParty/xxHash
-	url = https://github.com/pulsaraudio/xxHash
+	url = git@github.com:pulsaraudio/xxHash.git
 
 # Other Diligent Graphics sub-modules
 [submodule "ThirdParty/googletest"]
