@@ -55,6 +55,10 @@
 #   endif
 #endif
 
+#ifndef DILIGENT_USE_LATEST_VULKAN
+#   define DILIGENT_USE_LATEST_VULKAN 0 // Useful only if not DILIGENT_USE_VOLK
+#endif
+
 namespace VulkanUtilities
 {
 
@@ -314,6 +318,8 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
         // Only Vulkan 1.0 is supported.
         ApiVersion = VK_API_VERSION_1_0;
     }
+#elif DILIGENT_USE_LATEST_VULKAN
+    ApiVersion = VK_API_VERSION_1_3;
 #else
     // Without Volk we can only use Vulkan 1.0
     ApiVersion = VK_API_VERSION_1_0;
