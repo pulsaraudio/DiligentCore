@@ -337,8 +337,8 @@ if(MSVC)
     set(DILIGENT_MSVC_DEBUG_COMPILE_OPTIONS "" CACHE STRING "Additional MSVC compile options for debug configuration")
 
     if("${TARGET_CPU}" STREQUAL "x86_64")
-        # Enable AVX2
-        set(DILIGENT_MSVC_RELEASE_COMPILE_OPTIONS "/arch:AVX2")
+        # Don't use AVX2
+        # set(DILIGENT_MSVC_RELEASE_COMPILE_OPTIONS "/arch:AVX2")
     endif()
     set(DILIGENT_MSVC_RELEASE_COMPILE_OPTIONS ${DILIGENT_MSVC_RELEASE_COMPILE_OPTIONS} CACHE STRING "Additional MSVC compile options for release configurations")
 
@@ -402,8 +402,8 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     set(DILIGENT_CLANG_DEBUG_COMPILE_OPTIONS "" CACHE STRING "Additional Clang compile options for debug configuration")
 
     if("${TARGET_CPU}" STREQUAL "x86_64")
-        # Enable AVX2
-        set(DILIGENT_CLANG_RELEASE_COMPILE_OPTIONS "-mavx2")
+        # # Don't use AVX2
+        # set(DILIGENT_CLANG_RELEASE_COMPILE_OPTIONS "-mavx2")
     endif()
     set(DILIGENT_CLANG_RELEASE_COMPILE_OPTIONS ${DILIGENT_CLANG_RELEASE_COMPILE_OPTIONS} CACHE STRING "Additional Clang compile options for release configurations")
 
