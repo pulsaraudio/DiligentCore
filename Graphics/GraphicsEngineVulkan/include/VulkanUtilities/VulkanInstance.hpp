@@ -53,11 +53,13 @@ public:
         uint32_t           ApiVersion             = 0;
         bool               EnableValidation       = false;
         bool               EnableDeviceSimulation = false;
+        bool               EnableInfoLogging      = false;
         bool               LogExtensions          = false;
         uint32_t           EnabledLayerCount      = 0;
         const char* const* ppEnabledLayerNames    = nullptr;
         uint32_t           ExtensionCount         = 0;
         const char* const* ppExtensionNames       = nullptr;
+        void*              pExtensionFeatures     = nullptr;
 
         VkAllocationCallbacks* pVkAllocator              = nullptr;
         uint32_t               IgnoreDebugMessageCount   = 0;

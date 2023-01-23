@@ -419,7 +419,7 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
 
     VkApplicationInfo appInfo{};
     appInfo.sType              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pNext              = nullptr; // Pointer to an extension-specific structure.
+    appInfo.pNext              = nullptr; // Pointer to an extension-specific structure (must be null by now)
     appInfo.pApplicationName   = nullptr;
     appInfo.applicationVersion = 0; // Developer-supplied version number of the application
     appInfo.pEngineName        = "Diligent Engine";
@@ -428,7 +428,7 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
 
     VkInstanceCreateInfo InstanceCreateInfo{};
     InstanceCreateInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    InstanceCreateInfo.pNext = nullptr; // Pointer to an extension-specific structure.
+    InstanceCreateInfo.pNext = CI.pExtensionFeatures; // Pointer to an extension-specific structure.
     InstanceCreateInfo.flags = 0;
     if (UsePortabilityEnumeration)
     {
@@ -456,7 +456,8 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
     // If requested, we enable the default validation layers for debugging
     if (m_DebugMode == DebugMode::Utils)
     {
-        constexpr VkDebugUtilsMessageSeverityFlagsEXT messageSeverity =
+        const VkDebugUtilsMessageSeverityFlagsEXT messageSeverity =
+            (CI.EnableInfoLogging ? VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT : 0) |
             VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
             VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
         constexpr VkDebugUtilsMessageTypeFlagsEXT messageType =
@@ -468,10 +469,11 @@ VulkanInstance::VulkanInstance(const CreateInfo& CI) :
     }
     else if (m_DebugMode == DebugMode::Report)
     {
-        constexpr VkDebugReportFlagBitsEXT flags = static_cast<VkDebugReportFlagBitsEXT>(
+        const VkDebugReportFlagsEXT flags =
+            (CI.EnableInfoLogging ? VK_DEBUG_REPORT_INFORMATION_BIT_EXT : 0) |
             VK_DEBUG_REPORT_WARNING_BIT_EXT |
             VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT |
-            VK_DEBUG_REPORT_ERROR_BIT_EXT);
+            VK_DEBUG_REPORT_ERROR_BIT_EXT;
         if (!VulkanUtilities::SetupDebugReport(m_VkInstance, flags, nullptr))
             LOG_ERROR_MESSAGE("Failed to initialize debug report. Validation layer message logging will be disabled.");
     }

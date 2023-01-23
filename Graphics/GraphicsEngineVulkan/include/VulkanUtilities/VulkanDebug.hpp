@@ -6,6 +6,25 @@
 namespace VulkanUtilities
 {
 
+// Export the messenger callback for the case we want to give it to CreateDeviceAndContextsVk
+// via EngineVkCreateInfo.pInstanceExtensionFeatures -> VkDebugUtilsMessengerCreateInfoEXT
+VKAPI_ATTR VkBool32 VKAPI_CALL DebugMessengerCallback(VkDebugUtilsMessageSeverityFlagBitsEXT      messageSeverity,
+                                                      VkDebugUtilsMessageTypeFlagsEXT             messageType,
+                                                      const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
+                                                      void*                                       userData);
+
+// Export the report callback for the case we want to give it to CreateDeviceAndContextsVk
+// via EngineVkCreateInfo.pInstanceExtensionFeatures -> VkDebugReportCallbackCreateInfoEXT
+VkBool32 VKAPI_PTR DebugReportCallback(
+    VkDebugReportFlagsEXT      flags,
+    VkDebugReportObjectTypeEXT objectType,
+    uint64_t                   object,       // the object where the issue was detected
+    size_t                     location,     // a component (layer, driver, loader) defined value specifying the location of the trigger. This is an optional value.
+    int32_t                    messageCode,  // is a layer-defined value indicating what test triggered this callback.
+    const char*                pLayerPrefix, // a null-terminated string that is an abbreviation of the name of the component making the callback.
+    const char*                pMessage,     // a null-terminated string detailing the trigger conditions.
+    void*                      pUserData);
+
 // Loads the debug utils functions and initialized the debug callback.
 bool SetupDebugUtils(VkInstance                          instance,
                      VkDebugUtilsMessageSeverityFlagsEXT messageSeverity,
@@ -16,7 +35,7 @@ bool SetupDebugUtils(VkInstance                          instance,
 
 // Initializes the debug report callback.
 bool SetupDebugReport(VkInstance               instance,
-                      VkDebugReportFlagBitsEXT flags,
+                      VkDebugReportFlagsEXT    flags,
                       void*                    pUserData = nullptr);
 
 // Clears the debug utils/debug report callback

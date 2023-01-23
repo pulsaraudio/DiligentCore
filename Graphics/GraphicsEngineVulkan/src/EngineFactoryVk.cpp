@@ -652,11 +652,13 @@ void EngineFactoryVkImpl::CreateDeviceAndContextsVk(const EngineVkCreateInfo& En
         InstanceCI.ApiVersion                = VK_MAKE_VERSION(GraphicsAPIVersion.Major, GraphicsAPIVersion.Minor, 0);
         InstanceCI.EnableValidation          = EngineCI.EnableValidation;
         InstanceCI.EnableDeviceSimulation    = m_EnableDeviceSimulation;
+        InstanceCI.EnableInfoLogging         = EngineCI.EnableInfoLogging;
         InstanceCI.LogExtensions             = true;
         InstanceCI.EnabledLayerCount         = EngineCI.InstanceLayerCount;
         InstanceCI.ppEnabledLayerNames       = EngineCI.ppInstanceLayerNames;
         InstanceCI.ExtensionCount            = EngineCI.InstanceExtensionCount;
         InstanceCI.ppExtensionNames          = EngineCI.ppInstanceExtensionNames;
+        InstanceCI.pExtensionFeatures        = EngineCI.pInstanceExtensionFeatures;
         InstanceCI.pVkAllocator              = reinterpret_cast<VkAllocationCallbacks*>(EngineCI.pVkAllocator);
         InstanceCI.IgnoreDebugMessageCount   = EngineCI.IgnoreDebugMessageCount;
         InstanceCI.ppIgnoreDebugMessageNames = EngineCI.ppIgnoreDebugMessageNames;
@@ -1144,7 +1146,7 @@ void EngineFactoryVkImpl::CreateDeviceAndContextsVk(const EngineVkCreateInfo& En
         }
         else
         {
-            if (EngineCI.pDeviceExtensionFeatures == nullptr)
+            if (EngineCI.pDeviceExtensionFeatures != nullptr)
                 LOG_ERROR_MESSAGE("Can not enable extended device features when VK_KHR_get_physical_device_properties2 extension is not supported by device");
         }
 

@@ -47,6 +47,8 @@ VkDebugReportCallbackEXT DbgCallback  = VK_NULL_HANDLE;
 
 std::unordered_map<HashMapStringKey, std::atomic<int>> g_IgnoreMessages;
 
+} // namespace
+
 VKAPI_ATTR VkBool32 VKAPI_CALL DebugMessengerCallback(VkDebugUtilsMessageSeverityFlagBitsEXT      messageSeverity,
                                                       VkDebugUtilsMessageTypeFlagsEXT             messageType,
                                                       const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
@@ -193,8 +195,6 @@ VkBool32 VKAPI_PTR DebugReportCallback(
     return VK_FALSE;
 }
 
-} // namespace
-
 bool SetupDebugUtils(VkInstance                          instance,
                      VkDebugUtilsMessageSeverityFlagsEXT messageSeverity,
                      VkDebugUtilsMessageTypeFlagsEXT     messageType,
@@ -245,7 +245,7 @@ bool SetupDebugUtils(VkInstance                          instance,
 }
 
 bool SetupDebugReport(VkInstance               instance,
-                      VkDebugReportFlagBitsEXT flags,
+                      VkDebugReportFlagsEXT    flags,
                       void*                    pUserData)
 {
     CreateDebugReportCallbackEXT  = reinterpret_cast<PFN_vkCreateDebugReportCallbackEXT>(vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT"));

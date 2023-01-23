@@ -3319,6 +3319,13 @@ struct EngineCreateInfo
     ///             IEngineFactory::EnumerateAdapters().
     DeviceFeatures Features;
 
+    // Enable backend-specific information logging in complement to any error
+    // or warning logging that may be already provided. Backends such as Vulkan
+    // have their own logging mechanism, that is redirected to Diligent's
+    // DebugMessengerCallback. With this flag, information logs will
+    // also be redirected.
+    Bool                EnableInfoLogging           DEFAULT_INITIALIZER(false);
+
     /// Enable backend-specific validation (e.g. use Direct3D11 debug device, enable Direct3D12
     /// debug layer, enable Vulkan validation layers, create debug OpenGL context, etc.).
     /// The validation is enabled by default in Debug/Development builds and disabled
@@ -3663,6 +3670,10 @@ struct EngineVkCreateInfo DILIGENT_DERIVE(EngineCreateInfo)
 
     /// A list of additional Vulkan instance extensions to enable.
     const Char* const* ppInstanceExtensionNames DEFAULT_INITIALIZER(nullptr);
+
+    /// Pointer to Vulkan instance extension features.
+    /// Will be added to VkInstanceCreateInfo::pNext.
+    void*              pInstanceExtensionFeatures DEFAULT_INITIALIZER(nullptr);
 
     /// Number of Vulkan device extensions in ppDeviceExtensionNames array.
     Uint32             DeviceExtensionCount     DEFAULT_INITIALIZER(0);
