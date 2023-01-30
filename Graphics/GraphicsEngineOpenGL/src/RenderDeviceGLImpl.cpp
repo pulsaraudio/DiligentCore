@@ -611,6 +611,8 @@ void RenderDeviceGLImpl::InitAdapterInfo()
             m_AdapterInfo.Vendor = ADAPTER_VENDOR_QUALCOMM;
         else if (Vendor.find("arm"))
             m_AdapterInfo.Vendor = ADAPTER_VENDOR_ARM;
+        else if (Vendor.find("apple"))
+            m_AdapterInfo.Vendor = ADAPTER_VENDOR_APPLE;
         else
             m_AdapterInfo.Vendor = ADAPTER_VENDOR_UNKNOWN;
     }
