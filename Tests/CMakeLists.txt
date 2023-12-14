@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required (VERSION 3.6...3.24.2)
 
 if(TARGET gtest)
     add_subdirectory(TestFramework)

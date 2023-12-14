@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required (VERSION 3.6...3.24.2)
 
 # cmake_minimum_required(VERSION) resets all policies to their default
 # values for the VERSION, so calling cmake_policy(SET CMP0063 NEW) has

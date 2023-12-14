@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.11)
+cmake_minimum_required (VERSION 3.11...3.24.2)
 
 project(Diligent-GraphicsEngineD3D12 CXX)
 
