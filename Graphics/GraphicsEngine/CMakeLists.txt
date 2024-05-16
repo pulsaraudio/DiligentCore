@@ -149,6 +149,5 @@ if(Git_FOUND)
         ERROR_QUIET
         OUTPUT_STRIP_TRAILING_WHITESPACE)
     set(DILIGENT_CORE_COMMIT_HASH "${DILIGENT_CORE_COMMIT_HASH}" CACHE INTERNAL "" FORCE)
-    message(STATUS "DiligentCore commit hash: " ${DILIGENT_CORE_COMMIT_HASH})
     target_compile_definitions(Diligent-GraphicsEngine PRIVATE DILIGENT_CORE_COMMIT_HASH="${DILIGENT_CORE_COMMIT_HASH}")
 endif()

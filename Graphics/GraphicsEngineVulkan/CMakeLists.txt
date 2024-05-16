@@ -186,7 +186,7 @@ endif()
 # DXC for D3D12 can compile only to DXIL.
 if(PLATFORM_WIN32)
     # find Vulkan SDK
-    find_package(Vulkan)
+    find_package(Vulkan QUIET)
     if(Vulkan_FOUND)
         get_filename_component(VulkanSDKPath ${Vulkan_LIBRARY} DIRECTORY)
         set(VulkanSDKPath "${VulkanSDKPath}/..")
