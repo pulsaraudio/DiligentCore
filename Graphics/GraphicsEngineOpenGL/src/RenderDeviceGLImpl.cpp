@@ -588,7 +588,7 @@ void RenderDeviceGLImpl::InitAdapterInfo()
 
     // Set graphics adapter properties
     {
-        std::basic_string<GLubyte> glstrVendor = glGetString(GL_VENDOR);
+        std::string glstrVendor(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
         std::string                Vendor      = StrToLower(std::string(glstrVendor.begin(), glstrVendor.end()));
         LOG_INFO_MESSAGE("GPU Vendor: ", Vendor);
 
