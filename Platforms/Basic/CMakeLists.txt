@@ -1,4 +1,5 @@
 cmake_minimum_required (VERSION 3.6...3.24.2)
+cmake_policy(SET CMP0177 OLD)
 
 project(Diligent-BasicPlatform CXX)
 
